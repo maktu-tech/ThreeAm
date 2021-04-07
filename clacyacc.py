@@ -1,5 +1,4 @@
 import ply.yacc as yacc
-
 from claclex import tokens
 
 
@@ -137,6 +136,5 @@ pyt = 100
 res = pyt+res
 exit()
 '''
-
 result = parser.parse(data)
 print(result)
