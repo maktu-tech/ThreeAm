@@ -1,7 +1,7 @@
-# ------------------------------------------------------------
+# ----meet join kar le bhai--------------------------------------------------------
 # 
 # data_type: int(INT), char(CHR), string(STR), float(FLT), array, bool(BOOL), 
-# keyword: print, exit, (include), for, with, while, if - else, {continue}, {break}, and, or, true, false
+# keyword: print, exit, (include), for, with, while, if - else, {continue}, {break}, and, or, true, false, return
 # arthmetic operator "-"|"*"|"+"|"/"|"%"(MOD)
 # rln operator "=="(DEQUAL) | "!"(not equal to)(NOT) | ">"(GTHEN) | "<"(LTHEN)
 # assignment "=" (EQUAL)
@@ -13,7 +13,7 @@
 # comments #
 # ------------------------------------------------------------
 
-
+ 
 import ply.lex as lex
 
 # List of token names.   This is always required
@@ -57,7 +57,10 @@ tokens = (
    'NOT',
    'LTHEN',
    'GTHEN',
-   'COMMENT'
+   'COMMENT',
+   'MAIN',
+   'VOID',
+   'RETURN'
 )
 
 # Regular expression rules for simple tokens
@@ -85,6 +88,14 @@ def t_INT(t):
     r'int'
     return t
 
+def t_MAIN(t):
+    r'main'
+    return t
+
+def t_VOID(t):
+    r'void'
+    return t
+
 def t_CHR(t):
     r'char'
     return t
@@ -94,7 +105,7 @@ def t_STR(t):
     return t
 
 def t_BOOL(t):
-    r'int'
+    r'boolean'
     return t
 
 def t_FLT(t):
@@ -137,16 +148,22 @@ def t_OR(t):
     r'or'
     return t
 
+def t_RETURN(t):
+    r'return'
+    return t
+
 def t_TRUE(t):
     r'true'
+    t.value = 1
     return t
 
 def t_FALSE(t):
     r'false'
+    t.value = 0
     return t
 
 def t_IDVAR(t):
-    r'[_a-zA-Z0-9]+'
+    r'[_a-zA-Z][_a-zA-Z0-9]*'
     return t
 
 # A regular expression rule with some action code
@@ -166,7 +183,7 @@ def t_CHAR(t):
     r'\'([^\\\n]|(\\.))*?\''
     if(len(t.value) == 2):
         print("InValid Char")
-    t.value = t.value[-2]
+    t.value = ord(t.value[-2])
     return t
 
 
@@ -197,21 +214,22 @@ def t_error(t):
 # Build the lexer
 lexer = lex.lex()
  # Test it out
-data = '''
-int[] a = {4,5,6};
-< > + [] () { } ; 12.23 if else print exit 
-12Sds 
-_1 %1
-1false
-'''
+# data = '''
+# int[] a = {4,5,6};
+# < > + [] () { } ; 12.23 if else print exit 
+# 12Sds 
+# _1 %1
+# 1false
+# "ayush agarwal"
+# '''
 
 # data = 'int ayu = 45;'
 # # Give the lexer some input
-lexer.input(data)
+# lexer.input(data)
 
-# Tokenize
-while True:
-    tok = lexer.token()
-    if not tok: 
-        break      # No more input
-    print(tok)
+# # Tokenize
+# while True:
+#     tok = lexer.token()
+#     if not tok: 
+#         break      # No more input
+#     print(tok)
