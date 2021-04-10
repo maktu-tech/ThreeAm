@@ -1,9 +1,9 @@
 '''
-    ToDo:   print 
+    TODO:   print 
             for 
             with
             array
-            
+
 
 
     line -> nline line | nline

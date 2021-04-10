@@ -1,4 +1,4 @@
-# ----meet join kar le bhai--------------------------------------------------------
+# ------------------------------------------------------------
 # 
 # data_type: int(INT), char(CHR), string(STR), float(FLT), array, bool(BOOL), 
 # keyword: print, exit, (include), for, with, while, if - else, {continue}, {break}, and, or, true, false, return
@@ -206,7 +206,7 @@ def t_newline(t):
 # A string containing ignored characters (spaces and tabs)
 t_ignore  = ' \t\n'
 
-# Error handling rule
+# Error handlingf rule
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
