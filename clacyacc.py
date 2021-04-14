@@ -1,28 +1,23 @@
 '''
-    TODO:   print 
-            for 
-            with
-            array
-
-
-
     line -> nline line | nline
-    nline -> dtype var SCOLON  | STR var SCOLON
-    nline ->  dtype numexp | numexp  
-    numexp -> var EQUAL exp SCOLON
+    nline -> dtype var SCOLON | STR var SCOLON
+    nline ->  fline
+    fline : dtype numexp | numexp  
+    numexp -> assign SCOLON
     exp -> exp PLUS term | exp MINUS term | term
     term -> term MUL fact | term DIV fact | term MOD fact | fact
     fact -> INTEGER | FLOAT | var | bval | CHAR
     bval -> TRUE | FALSE
-    var -> IDVAR
+    var -> IDVAR | IDVAR LBB INTEGER RBB | IDVAR LBB IDVAR RBB
     dtype -> INT | FLT | CHR | BOOL
-    nline -> STR var EQUAL strvar SCOLON
+    nline -> STR IDVAR EQUAL strvar SCOLON
     strvar -> STRING | var
 
     nline : BOOL MAIN LPAREN RPAREN LCB line RCB 
     nline : RETURN LPAREN bval RPAREN SCOLON
     nline : EXIT LPAREN RPAREN SCOLON
-    nline : PRINT LPAREN nline RPAREN SCOLON
+    nline : PRINT LPAREN pline RPAREN SCOLON
+    pline : exp | STRING
 
     nline : ifsts
     ifsts : IF LPAREN bexp RPAREN LCB line RCB elsests
@@ -30,14 +25,21 @@
 
     bexp : bexp andor bexp2 | bexp2
     bexp2 : bexp2 rln exp | exp
-    rln: DEQUAL | GTHEN | LTHEN | NOT
+    rln : DEQUAL | GTHEN | LTHEN | NOT
     andor : AND | OR
     
     empty :
 
-    nline : FOR LPAREN nline bexp SCOLON nline RPAREN LCB line RCB
+    nline : FOR LPAREN fline bexp SCOLON assign RPAREN LCB line RCB
     nline : WHILE LPAREN bexp RPAREN LCB line RCB
+    assign : var EQUAL exp
+
     
+
+    nline : dtype LBB RBB IDVAR EQUAL arrt SCOLON | STR LBB RBB IDVAR EQUAL arrt SCOLON 
+    arrt : var | LCB dws RCB
+    dws : factarr COM dws | factarr
+    factarr : fact | STRING
 '''
 
 import ply.yacc as yacc
@@ -61,18 +63,14 @@ def p_line_chg(p):
             | nline'''
 
 def p_nline_init(p):
-    '''nline : dtype var SCOLON  
-             | STR var SCOLON'''
-    print(len(p), p[0],p[1],p[2],p[3])
-    vars[p[2]] = None
-    print(vars)
-
+    '''nline : dtype var SCOLON
+                | STR var SCOLON'''
+    
 def p_nline_dec(p):
-    '''nline : dtype numexp 
-             | numexp'''
+    'nline : fline'
 
 def p_nline_str(p):
-    'nline : STR var EQUAL strvar SCOLON'
+    'nline : STR IDVAR EQUAL strvar SCOLON'
     vars[p[2]] = p[4]
     
 def p_nline_main(p):
@@ -88,10 +86,14 @@ def p_nline_exit(p):
     'nline : EXIT LPAREN RPAREN SCOLON'
 
 def p_nline_print(p):
-    'nline : PRINT LPAREN nline RPAREN SCOLON'
+    'nline : PRINT LPAREN pline RPAREN SCOLON'
+
+def p_pline_print(p):
+    '''pline : exp
+            | STRING'''
 
 def p_nline_for(p):
-    'nline : FOR LPAREN nline bexp SCOLON nline RPAREN LCB line RCB'
+    'nline : FOR LPAREN fline bexp SCOLON assign RPAREN LCB line RCB'
 
 def p_nline_while(p):
     'nline : WHILE LPAREN bexp RPAREN LCB line RCB'
@@ -105,9 +107,8 @@ def p_elsests_fst(p):
                 | empty'''
 
 def p_numexp_stm(p):
-    'numexp : var EQUAL exp SCOLON'
-    vars[p[1]] = p[3]
-    print(vars)
+    'numexp : assign SCOLON'
+    
 
 def p_exp_pm(p):
     '''exp : exp PLUS term 
@@ -132,7 +133,9 @@ def p_bval_val(p):
             | FALSE'''
 
 def p_var_id(p):
-    'var : IDVAR'
+    '''var : IDVAR
+            | IDVAR LBB INTEGER RBB
+            | IDVAR LBB IDVAR RBB'''
     p[0] = p[1]
 
 def p_dtype_num(p):
@@ -166,6 +169,30 @@ def p_andor_fst(p):
 def p_empty(p):
     'empty :'
     pass
+
+def p_assign_num(p):
+    'assign : var EQUAL exp'
+
+def p_fline_for(p):
+    '''fline : dtype numexp 
+            | numexp'''
+
+
+def p_nline_arr(p):
+    '''nline : dtype LBB RBB IDVAR EQUAL arrt SCOLON
+                | STR LBB RBB IDVAR EQUAL arrt SCOLON'''
+
+def p_arrt_data(p):
+    '''arrt : var 
+            | LCB dws RCB'''
+
+def p_dws_vals(p):
+    '''dws : factarr COM dws 
+            | factarr'''
+   
+def p_factarr_vals(p):
+    '''factarr : fact 
+    | STRING'''
 
 
 
@@ -268,9 +295,26 @@ parser = yacc.yacc()
 #    print(result)
 
 data = '''
+int[] arr = {1,"df",23, true, 12.32, 'w',asdf};
+int as[2];
+int[] asdf = {12};
+string[] a1 = {1,2,3};
+
+boolean main(){
+if(a[0]==a[1]){
+for(int a=1; b>2; b=b+1){
+    a[4]=1;
+}
+}}
+'''
+
+
+
+
+'''
 boolean main(){
 if(a==a){
-for(int a=1; b>2; b=b+1;){
+for(int a=1; b>2; b=b+1){
     a=1;
 }
 while(a>d<as<asdf>1<2 and a!1==df<2.34>'1' or true or false){
@@ -284,7 +328,7 @@ while(a>d<as<asdf>1<2 and a!1==df<2.34>'1' or true or false){
         }
 }
 string z;
-print(int a= 1;);
+print(a+b*4-6/23%2);
 # return();
 return(true);
 exit();

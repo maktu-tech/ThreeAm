@@ -1,24 +1,35 @@
 def printTab(tbl,clm):
-    print('',end='\t')
+    f.write('\t\t')
+    # print('',end='\t')
     for e in clm:
         if(len(e)==8):
-            print(e,end='')
+            # print(e,end='')
+            f.write(e)
+        elif(len(e)>3):
+            f.write(e+'\t')
         else:
-            print(e,end ='\t')
-    print()
+            f.write(e+'\t\t')
+            # print(e,end ='\t')
+    # print()
+    f.write('\n')
     rn = 0
     for row in tbl:
-        print(rn,end='\t')
+        # print(rn,end='\t')
+        f.write(str(rn)+'\t\t')
         rn+=1
         for cell in row:
-            print(cell,end='\t')
-        print()
+            # print(cell,end='\t')
+            if(len(cell)>3):
+                f.write(cell+'\t')
+            else:
+                f.write(cell+'\t\t')
+        # print()
+        f.write('\n')
 
 def accp(tbl):
     for i in range(len(tbl[1])):
         tbl[1][i] = 'acpt'
-
-class State:
+class  State:
     def __init__(self,rstr):
         self.rawStr = rstr
         self.sft = {}
@@ -53,6 +64,10 @@ class State:
 
 f = open('parser.out')
 data = f.read().split('\n')
+f.close()
+
+f = open('table.txt','w')
+
 temp = []
 for i in range(len(data)):
     data[i] = data[i].strip()
@@ -73,7 +88,7 @@ rules = []
 while(data[i][:4] == 'Rule'):
     rules.append(' '.join(data[i].split()[2:]))
     i+=1
-
+   
 data = data[i+1:]
 
 terminals = []
@@ -81,13 +96,12 @@ terminals = []
 i = 0
 while(data[i][:5] != 'error'):
     terminals.append(data[i].split()[0])
-    i+=1
-terminals.append('$end')
+    i+=1 
+terminals.append('$end')   
 data = data[i+2:]
-
 i = 0
 nonterminals = []
-while(data[i][:7] != 'Parsing'):
+while(data[i][:7] != 'Parsing'):   
     nonterminals.append(data[i].split()[0])
     i+=1
 
@@ -114,7 +128,6 @@ sts.append(State(temp))
 
 
 table = []
-# tecount = len(terminals)+len(nonterminals)
 
 for s in sts:
     row = []
@@ -122,7 +135,7 @@ for s in sts:
     rkeys = list(s.rds.keys())
     for ter in terminals:
         if(ter in skeys):
-            row.append(s.sft[ter])
+            row.append('s'+s.sft[ter])
         elif(ter in rkeys):
             row.append('r'+s.rds[ter])
         else:
@@ -137,5 +150,6 @@ for s in sts:
             row.append('-')
     
     table.append(row)
+
 accp(table)
 printTab(table,(terminals+nonterminals))
