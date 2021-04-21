@@ -13,7 +13,7 @@
 # comments #
 # ------------------------------------------------------------
 
- 
+  
 import ply.lex as lex
 
 # List of token names.   This is always required
@@ -154,12 +154,12 @@ def t_RETURN(t):
 
 def t_TRUE(t):
     r'true'
-    t.value = 1
+    t.value = {'type': 'boolean', 'value': 1, 'line': t.lexer.lineno}
     return t
 
 def t_FALSE(t):
     r'false'
-    t.value = 0
+    t.value = {'type': 'boolean', 'value': 0, 'line': t.lexer.lineno}
     return t
 
 def t_IDVAR(t):
@@ -170,20 +170,20 @@ def t_IDVAR(t):
 
 def t_FLOAT(t):
     r'[+-]?[0-9]+\.[0-9]+'
-    t.value = float(t.value)    
+    t.value = {'type': 'float', 'value': float(t.value), 'line': t.lexer.lineno} 
     return t
 
 
 def t_INTEGER(t):
     r'\d+'
-    t.value = int(t.value)    
+    t.value = {'type': 'int', 'value': int(t.value), 'line': t.lexer.lineno} 
     return t
 
 def t_CHAR(t):
     r'\'([^\\\n]|(\\.))*?\''
     if(len(t.value) == 2):
         print("InValid Char")
-    t.value = ord(t.value[-2])
+    t.value = {'type': 'char', 'value': ord(t.value[-2]), 'line': t.lexer.lineno} 
     return t
 
 
@@ -195,6 +195,7 @@ def t_COMMENT(t):
  # C string
 def t_STRING(t):
     r'\"([^\\\n]|(\\.))*?\"'
+    t.value = t.value.strip('\"')
     return t
 
 
@@ -204,7 +205,7 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 # A string containing ignored characters (spaces and tabs)
-t_ignore  = ' \t\n'
+t_ignore  = ' \t'
 
 # Error handlingf rule
 def t_error(t):

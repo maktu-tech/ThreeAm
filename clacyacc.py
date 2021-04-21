@@ -8,6 +8,7 @@
     term -> term MUL fact | term DIV fact | term MOD fact | fact
     fact -> INTEGER | FLOAT | var | bval | CHAR
     bval -> TRUE | FALSE
+    varval -> var
     var -> IDVAR | IDVAR LBB INTEGER RBB | IDVAR LBB IDVAR RBB
     dtype -> INT | FLT | CHR | BOOL
     nline -> STR IDVAR EQUAL strvar SCOLON
@@ -44,19 +45,7 @@
 
 import ply.yacc as yacc
 from claclex import tokens
- 
-
-vars = {}
-pyth = False
-
-# def p_lan_chg(p):
-#     '''lan : pyt
-#             | line'''
-#     if len(p) == 3:
-#         p[0] = p[2]
-#     else:
-#         p[0] = p[1]
-
+from symb_tbl import *
 
 def p_line_chg(p):
     '''line : nline line 
@@ -65,9 +54,12 @@ def p_line_chg(p):
 def p_nline_init(p):
     '''nline : dtype var SCOLON
                 | STR var SCOLON'''
+    store(p[2],p[1])
     
 def p_nline_dec(p):
     'nline : fline'
+    p[0] = p[1]
+    print(st)
 
 def p_nline_str(p):
     'nline : STR IDVAR EQUAL strvar SCOLON'
@@ -91,6 +83,7 @@ def p_nline_print(p):
 def p_pline_print(p):
     '''pline : exp
             | STRING'''
+    print(p[1])
 
 def p_nline_for(p):
     'nline : FOR LPAREN fline bexp SCOLON assign RPAREN LCB line RCB'
@@ -108,29 +101,70 @@ def p_elsests_fst(p):
 
 def p_numexp_stm(p):
     'numexp : assign SCOLON'
-    
+    p[0] = p[1]
 
 def p_exp_pm(p):
     '''exp : exp PLUS term 
            | exp MINUS term 
            | term'''
+    if(len(p)==4):
+        if(not p[1]['type'] == p[3]['type']):
+            print('ERROR: Type mismched in line:',p[1]['line'])
+            exit()
+        p1 = p[1]['value']
+        p3 = p[3]['value']
+        p0 = None
+        if(p[2] == '+'):
+            p0 = p1 + p3
+        else:
+            p0 = p1 - p3
+
+        p[0] = {'value':p0, 'type': p[1]['type'], 'line':p[1]['line']}
+    else:
+        p[0] = p[1]
 
 def p_term_mdm(p):
-    '''term : term MUL fact 
-            | term DIV fact 
-            | term MOD fact 
+    '''term : term MUL fact
+            | term DIV fact
+            | term MOD fact
             | fact'''
+
+    if(len(p)==4):
+        if(not p[1]['type'] == p[3]['type']):
+            print('ERROR: Type mismched in line:',p[1]['line'])
+            exit()
+        p1 = p[1]['value']
+        p3 = p[3]['value']
+        p0 = None
+        if(p[2] == '*'):
+            p0 = p1 * p3
+        elif(p[2] == '/'):
+            p0 = p1 / p3
+        else:
+            p0 = p1 % p3  
+
+        p[0] = {'value':p0, 'type': p[1]['type'], 'line':p[1]['line']}
+          
+    else:
+        p[0] = p[1]
+
 
 def p_fact_val(p):
     '''fact : INTEGER 
             | FLOAT 
-            | var
+            | varval
             | bval
             | CHAR'''
+    p[0] = p[1]
+
+def p_varval_val(p):
+    'varval : var'
+    p[0] = lookup(p[1])
 
 def p_bval_val(p):
     '''bval : TRUE
             | FALSE'''
+    p[0] = p[1]
 
 def p_var_id(p):
     '''var : IDVAR
@@ -143,6 +177,7 @@ def p_dtype_num(p):
             | FLT 
             | CHR 
             | BOOL'''
+    p[0] = p[1]
 
 def p_strvar_val(p):
     '''strvar : STRING 
@@ -172,11 +207,27 @@ def p_empty(p):
 
 def p_assign_num(p):
     'assign : var EQUAL exp'
+    if(not p[3]):
+        exit()
+    tval = p[3]
+    tval['name'] = p[1]
+    p[0] = tval
 
 def p_fline_for(p):
     '''fline : dtype numexp 
             | numexp'''
 
+    if(len(p) == 3):
+        if( p[2]['type'] != p[1]):
+            print("ERROR: Missmached type at line:",p[2]['line'])
+            exit()
+        store(p[2]['name'],p[1],p[2]['value'],p[2]['line'])
+    else:
+        tval = lookup(p[1]['name'])
+        if( p[1]['type'] != tval['type']):
+            print("ERROR: Missmached type: {} not matched with {} datatype".format(p[1]['name'],p[1]['type']))
+            exit()
+        st[p[1]['name']]['value'] = p[1]['value']
 
 def p_nline_arr(p):
     '''nline : dtype LBB RBB IDVAR EQUAL arrt SCOLON
@@ -195,88 +246,6 @@ def p_factarr_vals(p):
     | STRING'''
 
 
-
-# def p_nlineP_print(p):
-#     'nlineP : PRINT LPAREN var RPAREN'
-#     print(vars[p[3]])
-
-# def p_nlineP_exit(p):
-#     'nlineP : EXIT LPAREN RPAREN'
-#     exit()
-
-# def p_line_rep(p):
-#     '''line : nline line
-#             | nline
-#             | pyt'''
-#     p[0] = p[1]
-
-
-# def p_nline_var(p):
-#     '''nline : INTEGER var EQUAL expression SEMICOLON'''
-#     if not p[2] in vars:
-#         vars[p[2]] = p[4]
-#         print(vars)
-
-# def p_nline_var_update(p):
-#     'nline : var EQUAL expression SEMICOLON'
-#     if p[1] in vars:
-#         vars[p[1]] = p[3]
-#         p[0] = p[3]
-
-# def p_nline_exit(p):
-#     'nline : EXIT LPAREN RPAREN SEMICOLON'
-#     exit()
-
-# def p_nline_print(p):
-#     'nline : PRINT LPAREN var RPAREN SEMICOLON'
-#     print(vars[p[3]])
-
-# def p_var_id(p):
-#     'var : IDVAR'
-#     p[0] = p[1]
-
-# def p_expression_var(p):
-#     'expression : var'
-#     p[0] = vars[p[1]]
-
-# def p_expression_plus(p):
-#     'expression : expression PLUS term'
-#     p[0] = p[1] + p[3]
-
-# def p_expression_minus(p):
-#     'expression : expression MINUS term'
-#     p[0] = p[1] - p[3]
-
-# def p_expression_term(p):
-#     'expression : term'
-#     p[0] = p[1]
-
-# def p_term_times(p):
-#     'term : term TIMES factor'
-#     p[0] = p[1] * p[3]
-
-# def p_term_div(p):
-#     'term : term DIVIDE factor'
-#     p[0] = p[1] / p[3]
-
-# def p_term_factor(p):
-#     'term : factor'
-#     p[0] = p[1]
-
-# def p_factor_num(p):
-#     '''factor : NUMBER
-#               | var'''
-#     if p[1] in vars:
-#         p[0] = vars[p[1]]
-#     elif type(p[1]) == type(0):
-#         p[0] = p[1]
-#     else:
-#         print('error')
-
-# def p_factor_expr(p):
-#     'factor : LPAREN expression RPAREN'
-#     p[0] = p[2]
-
 # Error rule for syntax errors
 def p_error(p):
     print("Syntax error in input!")
@@ -294,7 +263,11 @@ parser = yacc.yacc()
 #    result = parser.parse(s)
 #    print(result)
 
-data = '''
+
+f = open('demo.tam')
+data = f.read()
+
+'''
 int[] arr = {1,"df",23, true, 12.32, 'w',asdf};
 int as[2];
 int[] asdf = {12};
