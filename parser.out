@@ -44,83 +44,82 @@ Rule 32    fact -> varval
 Rule 33    fact -> bval
 Rule 34    fact -> CHAR
 Rule 35    varval -> var
-Rule 36    bval -> TRUE
-Rule 37    bval -> FALSE
-Rule 38    var -> IDVAR
-Rule 39    var -> IDVAR LBB INTEGER RBB
-Rule 40    var -> IDVAR LBB IDVAR RBB
-Rule 41    dtype -> INT
-Rule 42    dtype -> FLT
-Rule 43    dtype -> CHR
-Rule 44    dtype -> BOOL
-Rule 45    strvar -> STRING
-Rule 46    strvar -> varval
-Rule 47    bexp -> bexp andor bexp2
-Rule 48    bexp -> bexp2
-Rule 49    bexp2 -> bexp2 rln exp
-Rule 50    bexp2 -> exp
-Rule 51    rln -> DEQUAL
-Rule 52    rln -> GTHEN
-Rule 53    rln -> LTHEN
-Rule 54    rln -> NOT
-Rule 55    andor -> AND
-Rule 56    andor -> OR
-Rule 57    empty -> <empty>
-Rule 58    assign -> var EQUAL exp
-Rule 59    assign -> var EQUAL STRING
-Rule 60    fline -> dtype numexp
-Rule 61    fline -> numexp
-Rule 62    nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON
-Rule 63    nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON
-Rule 64    arrt -> var
-Rule 65    arrt -> LCB dws RCB
-Rule 66    dws -> factarr COM dws
-Rule 67    dws -> factarr
-Rule 68    factarr -> fact
-Rule 69    factarr -> STRING
+Rule 36    varval -> var LBB exp RBB
+Rule 37    bval -> TRUE
+Rule 38    bval -> FALSE
+Rule 39    var -> IDVAR
+Rule 40    dtype -> INT
+Rule 41    dtype -> FLT
+Rule 42    dtype -> CHR
+Rule 43    dtype -> BOOL
+Rule 44    strvar -> STRING
+Rule 45    strvar -> varval
+Rule 46    bexp -> bexp andor bexp2
+Rule 47    bexp -> bexp2
+Rule 48    bexp2 -> bexp2 rln exp
+Rule 49    bexp2 -> exp
+Rule 50    rln -> DEQUAL
+Rule 51    rln -> GTHEN
+Rule 52    rln -> LTHEN
+Rule 53    rln -> NOT
+Rule 54    andor -> AND
+Rule 55    andor -> OR
+Rule 56    empty -> <empty>
+Rule 57    assign -> varval EQUAL exp
+Rule 58    assign -> varval EQUAL STRING
+Rule 59    fline -> dtype numexp
+Rule 60    fline -> numexp
+Rule 61    nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON
+Rule 62    nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON
+Rule 63    arrt -> var
+Rule 64    arrt -> LCB dws RCB
+Rule 65    dws -> factarr COM dws
+Rule 66    dws -> factarr
+Rule 67    factarr -> fact
+Rule 68    factarr -> STRING
 
 Terminals, with rules where they appear
 
-AND                  : 55
-BOOL                 : 7 44
+AND                  : 54
+BOOL                 : 7 43
 CHAR                 : 34
-CHR                  : 43
-COM                  : 66
+CHR                  : 42
+COM                  : 65
 COMMENT              : 
-DEQUAL               : 51
+DEQUAL               : 50
 DIV                  : 27
 ELSE                 : 19 20
-EQUAL                : 6 58 59 62 63
+EQUAL                : 6 57 58 61 62
 EXIT                 : 10
-FALSE                : 37
+FALSE                : 38
 FLOAT                : 31
-FLT                  : 42
+FLT                  : 41
 FOR                  : 14
-GTHEN                : 52
-IDVAR                : 6 38 39 40 40 62 63
+GTHEN                : 51
+IDVAR                : 6 39 61 62
 IF                   : 16
-INT                  : 41
-INTEGER              : 30 39
-LBB                  : 39 40 62 63
-LCB                  : 18 65
+INT                  : 40
+INTEGER              : 30
+LBB                  : 36 61 62
+LCB                  : 18 64
 LPAREN               : 7 8 10 11 14 15 16
-LTHEN                : 53
+LTHEN                : 52
 MAIN                 : 7
 MINUS                : 24
 MOD                  : 28
 MUL                  : 26
-NOT                  : 54
-OR                   : 56
+NOT                  : 53
+OR                   : 55
 PLUS                 : 23
 PRINT                : 11
-RBB                  : 39 40 62 63
-RCB                  : 17 65
+RBB                  : 36 61 62
+RCB                  : 17 64
 RETURN               : 8
 RPAREN               : 7 8 10 11 14 15 16
-SCOLON               : 3 4 6 8 10 11 14 22 62 63
-STR                  : 4 6 63
-STRING               : 13 45 59 69
-TRUE                 : 36
+SCOLON               : 3 4 6 8 10 11 14 22 61 62
+STR                  : 4 6 62
+STRING               : 13 44 58 68
+TRUE                 : 37
 VOID                 : 
 WHILE                : 15
 WITH                 : 
@@ -128,32 +127,32 @@ error                :
 
 Nonterminals, with rules where they appear
 
-andor                : 47
-arrt                 : 62 63
+andor                : 46
+arrt                 : 61 62
 assign               : 14 22
-bexp                 : 14 15 16 47
-bexp2                : 47 48 49
+bexp                 : 14 15 16 46
+bexp2                : 46 47 48
 bval                 : 8 33
-dtype                : 3 60 62
-dws                  : 65 66
+dtype                : 3 59 61
+dws                  : 64 65
 elsests              : 16
 empty                : 21
-exp                  : 12 23 24 49 50 58
-fact                 : 26 27 28 29 68
-factarr              : 66 67
+exp                  : 12 23 24 36 48 49 57
+fact                 : 26 27 28 29 67
+factarr              : 65 66
 fline                : 5 14
 ifsts                : 9 20
 lcb                  : 7 14 15 16 19
 line                 : 1 7 14 15 16 19 0
 nline                : 1 2
-numexp               : 60 61
+numexp               : 59 60
 pline                : 11
 rcb                  : 7 14 15 16 19
-rln                  : 49
+rln                  : 48
 strvar               : 6
 term                 : 23 24 25 26 27 28
-var                  : 3 4 35 58 59 64
-varval               : 32 46
+var                  : 3 4 35 36 63
+varval               : 32 45 57 58
 
 Parsing method: LALR
 
@@ -173,21 +172,21 @@ state 0
     (11) nline -> . PRINT LPAREN pline RPAREN SCOLON
     (14) nline -> . FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
     (15) nline -> . WHILE LPAREN bexp RPAREN lcb line rcb
-    (62) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
-    (63) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
-    (41) dtype -> . INT
-    (42) dtype -> . FLT
-    (43) dtype -> . CHR
-    (44) dtype -> . BOOL
-    (60) fline -> . dtype numexp
-    (61) fline -> . numexp
+    (61) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
+    (62) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
+    (40) dtype -> . INT
+    (41) dtype -> . FLT
+    (42) dtype -> . CHR
+    (43) dtype -> . BOOL
+    (59) fline -> . dtype numexp
+    (60) fline -> . numexp
     (16) ifsts -> . IF LPAREN bexp RPAREN lcb line rcb elsests
     (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
 
     STR             shift and go to state 5
     BOOL            shift and go to state 8
@@ -210,6 +209,7 @@ state 0
     ifsts                          shift and go to state 10
     assign                         shift and go to state 14
     numexp                         shift and go to state 19
+    varval                         shift and go to state 21
 
 state 1
 
@@ -234,21 +234,21 @@ state 2
     (11) nline -> . PRINT LPAREN pline RPAREN SCOLON
     (14) nline -> . FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
     (15) nline -> . WHILE LPAREN bexp RPAREN lcb line rcb
-    (62) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
-    (63) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
-    (41) dtype -> . INT
-    (42) dtype -> . FLT
-    (43) dtype -> . CHR
-    (44) dtype -> . BOOL
-    (60) fline -> . dtype numexp
-    (61) fline -> . numexp
+    (61) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
+    (62) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
+    (40) dtype -> . INT
+    (41) dtype -> . FLT
+    (42) dtype -> . CHR
+    (43) dtype -> . BOOL
+    (59) fline -> . dtype numexp
+    (60) fline -> . numexp
     (16) ifsts -> . IF LPAREN bexp RPAREN lcb line rcb elsests
     (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
 
     $end            reduce using rule 2 (line -> nline .)
     RCB             reduce using rule 2 (line -> nline .)
@@ -266,54 +266,71 @@ state 2
     IDVAR           shift and go to state 7
 
     nline                          shift and go to state 2
-    line                           shift and go to state 21
+    line                           shift and go to state 22
     dtype                          shift and go to state 3
     var                            shift and go to state 4
     fline                          shift and go to state 6
     ifsts                          shift and go to state 10
     assign                         shift and go to state 14
     numexp                         shift and go to state 19
+    varval                         shift and go to state 21
 
 state 3
 
     (3) nline -> dtype . var SCOLON
-    (62) nline -> dtype . LBB RBB IDVAR EQUAL arrt SCOLON
-    (60) fline -> dtype . numexp
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (61) nline -> dtype . LBB RBB IDVAR EQUAL arrt SCOLON
+    (59) fline -> dtype . numexp
+    (39) var -> . IDVAR
     (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
 
-    LBB             shift and go to state 23
+    LBB             shift and go to state 24
     IDVAR           shift and go to state 7
 
-    var                            shift and go to state 22
-    numexp                         shift and go to state 24
+    var                            shift and go to state 23
+    numexp                         shift and go to state 25
     assign                         shift and go to state 14
+    varval                         shift and go to state 21
 
 state 4
 
-    (58) assign -> var . EQUAL exp
-    (59) assign -> var . EQUAL STRING
+    (35) varval -> var .
+    (36) varval -> var . LBB exp RBB
 
-    EQUAL           shift and go to state 25
+    EQUAL           reduce using rule 35 (varval -> var .)
+    MUL             reduce using rule 35 (varval -> var .)
+    DIV             reduce using rule 35 (varval -> var .)
+    MOD             reduce using rule 35 (varval -> var .)
+    RBB             reduce using rule 35 (varval -> var .)
+    PLUS            reduce using rule 35 (varval -> var .)
+    MINUS           reduce using rule 35 (varval -> var .)
+    RPAREN          reduce using rule 35 (varval -> var .)
+    DEQUAL          reduce using rule 35 (varval -> var .)
+    GTHEN           reduce using rule 35 (varval -> var .)
+    LTHEN           reduce using rule 35 (varval -> var .)
+    NOT             reduce using rule 35 (varval -> var .)
+    AND             reduce using rule 35 (varval -> var .)
+    OR              reduce using rule 35 (varval -> var .)
+    SCOLON          reduce using rule 35 (varval -> var .)
+    COM             reduce using rule 35 (varval -> var .)
+    RCB             reduce using rule 35 (varval -> var .)
+    LBB             shift and go to state 26
 
 
 state 5
 
     (4) nline -> STR . var SCOLON
     (6) nline -> STR . IDVAR EQUAL strvar SCOLON
-    (63) nline -> STR . LBB RBB IDVAR EQUAL arrt SCOLON
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (62) nline -> STR . LBB RBB IDVAR EQUAL arrt SCOLON
+    (39) var -> . IDVAR
 
-    IDVAR           shift and go to state 27
-    LBB             shift and go to state 28
+    IDVAR           shift and go to state 28
+    LBB             shift and go to state 29
 
-    var                            shift and go to state 26
+    var                            shift and go to state 27
 
 state 6
 
@@ -337,37 +354,36 @@ state 6
 
 state 7
 
-    (38) var -> IDVAR .
-    (39) var -> IDVAR . LBB INTEGER RBB
-    (40) var -> IDVAR . LBB IDVAR RBB
+    (39) var -> IDVAR .
 
-    EQUAL           reduce using rule 38 (var -> IDVAR .)
-    SCOLON          reduce using rule 38 (var -> IDVAR .)
-    MUL             reduce using rule 38 (var -> IDVAR .)
-    DIV             reduce using rule 38 (var -> IDVAR .)
-    MOD             reduce using rule 38 (var -> IDVAR .)
-    PLUS            reduce using rule 38 (var -> IDVAR .)
-    MINUS           reduce using rule 38 (var -> IDVAR .)
-    RPAREN          reduce using rule 38 (var -> IDVAR .)
-    DEQUAL          reduce using rule 38 (var -> IDVAR .)
-    GTHEN           reduce using rule 38 (var -> IDVAR .)
-    LTHEN           reduce using rule 38 (var -> IDVAR .)
-    NOT             reduce using rule 38 (var -> IDVAR .)
-    AND             reduce using rule 38 (var -> IDVAR .)
-    OR              reduce using rule 38 (var -> IDVAR .)
-    COM             reduce using rule 38 (var -> IDVAR .)
-    RCB             reduce using rule 38 (var -> IDVAR .)
-    LBB             shift and go to state 29
+    LBB             reduce using rule 39 (var -> IDVAR .)
+    EQUAL           reduce using rule 39 (var -> IDVAR .)
+    SCOLON          reduce using rule 39 (var -> IDVAR .)
+    MUL             reduce using rule 39 (var -> IDVAR .)
+    DIV             reduce using rule 39 (var -> IDVAR .)
+    MOD             reduce using rule 39 (var -> IDVAR .)
+    RBB             reduce using rule 39 (var -> IDVAR .)
+    PLUS            reduce using rule 39 (var -> IDVAR .)
+    MINUS           reduce using rule 39 (var -> IDVAR .)
+    RPAREN          reduce using rule 39 (var -> IDVAR .)
+    DEQUAL          reduce using rule 39 (var -> IDVAR .)
+    GTHEN           reduce using rule 39 (var -> IDVAR .)
+    LTHEN           reduce using rule 39 (var -> IDVAR .)
+    NOT             reduce using rule 39 (var -> IDVAR .)
+    AND             reduce using rule 39 (var -> IDVAR .)
+    OR              reduce using rule 39 (var -> IDVAR .)
+    COM             reduce using rule 39 (var -> IDVAR .)
+    RCB             reduce using rule 39 (var -> IDVAR .)
 
 
 state 8
 
     (7) nline -> BOOL . MAIN LPAREN RPAREN lcb line rcb
-    (44) dtype -> BOOL .
+    (43) dtype -> BOOL .
 
     MAIN            shift and go to state 30
-    LBB             reduce using rule 44 (dtype -> BOOL .)
-    IDVAR           reduce using rule 44 (dtype -> BOOL .)
+    LBB             reduce using rule 43 (dtype -> BOOL .)
+    IDVAR           reduce using rule 43 (dtype -> BOOL .)
 
 
 state 9
@@ -434,51 +450,51 @@ state 15
 
 state 16
 
-    (41) dtype -> INT .
+    (40) dtype -> INT .
 
-    LBB             reduce using rule 41 (dtype -> INT .)
-    IDVAR           reduce using rule 41 (dtype -> INT .)
+    LBB             reduce using rule 40 (dtype -> INT .)
+    IDVAR           reduce using rule 40 (dtype -> INT .)
 
 
 state 17
 
-    (42) dtype -> FLT .
+    (41) dtype -> FLT .
 
-    LBB             reduce using rule 42 (dtype -> FLT .)
-    IDVAR           reduce using rule 42 (dtype -> FLT .)
+    LBB             reduce using rule 41 (dtype -> FLT .)
+    IDVAR           reduce using rule 41 (dtype -> FLT .)
 
 
 state 18
 
-    (43) dtype -> CHR .
+    (42) dtype -> CHR .
 
-    LBB             reduce using rule 43 (dtype -> CHR .)
-    IDVAR           reduce using rule 43 (dtype -> CHR .)
+    LBB             reduce using rule 42 (dtype -> CHR .)
+    IDVAR           reduce using rule 42 (dtype -> CHR .)
 
 
 state 19
 
-    (61) fline -> numexp .
+    (60) fline -> numexp .
 
-    STR             reduce using rule 61 (fline -> numexp .)
-    BOOL            reduce using rule 61 (fline -> numexp .)
-    RETURN          reduce using rule 61 (fline -> numexp .)
-    EXIT            reduce using rule 61 (fline -> numexp .)
-    PRINT           reduce using rule 61 (fline -> numexp .)
-    FOR             reduce using rule 61 (fline -> numexp .)
-    WHILE           reduce using rule 61 (fline -> numexp .)
-    INT             reduce using rule 61 (fline -> numexp .)
-    FLT             reduce using rule 61 (fline -> numexp .)
-    CHR             reduce using rule 61 (fline -> numexp .)
-    IF              reduce using rule 61 (fline -> numexp .)
-    IDVAR           reduce using rule 61 (fline -> numexp .)
-    $end            reduce using rule 61 (fline -> numexp .)
-    RCB             reduce using rule 61 (fline -> numexp .)
-    INTEGER         reduce using rule 61 (fline -> numexp .)
-    FLOAT           reduce using rule 61 (fline -> numexp .)
-    CHAR            reduce using rule 61 (fline -> numexp .)
-    TRUE            reduce using rule 61 (fline -> numexp .)
-    FALSE           reduce using rule 61 (fline -> numexp .)
+    STR             reduce using rule 60 (fline -> numexp .)
+    BOOL            reduce using rule 60 (fline -> numexp .)
+    RETURN          reduce using rule 60 (fline -> numexp .)
+    EXIT            reduce using rule 60 (fline -> numexp .)
+    PRINT           reduce using rule 60 (fline -> numexp .)
+    FOR             reduce using rule 60 (fline -> numexp .)
+    WHILE           reduce using rule 60 (fline -> numexp .)
+    INT             reduce using rule 60 (fline -> numexp .)
+    FLT             reduce using rule 60 (fline -> numexp .)
+    CHR             reduce using rule 60 (fline -> numexp .)
+    IF              reduce using rule 60 (fline -> numexp .)
+    IDVAR           reduce using rule 60 (fline -> numexp .)
+    $end            reduce using rule 60 (fline -> numexp .)
+    RCB             reduce using rule 60 (fline -> numexp .)
+    INTEGER         reduce using rule 60 (fline -> numexp .)
+    FLOAT           reduce using rule 60 (fline -> numexp .)
+    CHAR            reduce using rule 60 (fline -> numexp .)
+    TRUE            reduce using rule 60 (fline -> numexp .)
+    FALSE           reduce using rule 60 (fline -> numexp .)
 
 
 state 20
@@ -490,58 +506,66 @@ state 20
 
 state 21
 
+    (57) assign -> varval . EQUAL exp
+    (58) assign -> varval . EQUAL STRING
+
+    EQUAL           shift and go to state 38
+
+
+state 22
+
     (1) line -> nline line .
 
     $end            reduce using rule 1 (line -> nline line .)
     RCB             reduce using rule 1 (line -> nline line .)
 
 
-state 22
-
-    (3) nline -> dtype var . SCOLON
-    (58) assign -> var . EQUAL exp
-    (59) assign -> var . EQUAL STRING
-
-    SCOLON          shift and go to state 38
-    EQUAL           shift and go to state 25
-
-
 state 23
 
-    (62) nline -> dtype LBB . RBB IDVAR EQUAL arrt SCOLON
+    (3) nline -> dtype var . SCOLON
+    (35) varval -> var .
+    (36) varval -> var . LBB exp RBB
 
-    RBB             shift and go to state 39
+    SCOLON          shift and go to state 39
+    EQUAL           reduce using rule 35 (varval -> var .)
+    LBB             shift and go to state 26
 
 
 state 24
 
-    (60) fline -> dtype numexp .
+    (61) nline -> dtype LBB . RBB IDVAR EQUAL arrt SCOLON
 
-    STR             reduce using rule 60 (fline -> dtype numexp .)
-    BOOL            reduce using rule 60 (fline -> dtype numexp .)
-    RETURN          reduce using rule 60 (fline -> dtype numexp .)
-    EXIT            reduce using rule 60 (fline -> dtype numexp .)
-    PRINT           reduce using rule 60 (fline -> dtype numexp .)
-    FOR             reduce using rule 60 (fline -> dtype numexp .)
-    WHILE           reduce using rule 60 (fline -> dtype numexp .)
-    INT             reduce using rule 60 (fline -> dtype numexp .)
-    FLT             reduce using rule 60 (fline -> dtype numexp .)
-    CHR             reduce using rule 60 (fline -> dtype numexp .)
-    IF              reduce using rule 60 (fline -> dtype numexp .)
-    IDVAR           reduce using rule 60 (fline -> dtype numexp .)
-    $end            reduce using rule 60 (fline -> dtype numexp .)
-    RCB             reduce using rule 60 (fline -> dtype numexp .)
-    INTEGER         reduce using rule 60 (fline -> dtype numexp .)
-    FLOAT           reduce using rule 60 (fline -> dtype numexp .)
-    CHAR            reduce using rule 60 (fline -> dtype numexp .)
-    TRUE            reduce using rule 60 (fline -> dtype numexp .)
-    FALSE           reduce using rule 60 (fline -> dtype numexp .)
+    RBB             shift and go to state 40
 
 
 state 25
 
-    (58) assign -> var EQUAL . exp
-    (59) assign -> var EQUAL . STRING
+    (59) fline -> dtype numexp .
+
+    STR             reduce using rule 59 (fline -> dtype numexp .)
+    BOOL            reduce using rule 59 (fline -> dtype numexp .)
+    RETURN          reduce using rule 59 (fline -> dtype numexp .)
+    EXIT            reduce using rule 59 (fline -> dtype numexp .)
+    PRINT           reduce using rule 59 (fline -> dtype numexp .)
+    FOR             reduce using rule 59 (fline -> dtype numexp .)
+    WHILE           reduce using rule 59 (fline -> dtype numexp .)
+    INT             reduce using rule 59 (fline -> dtype numexp .)
+    FLT             reduce using rule 59 (fline -> dtype numexp .)
+    CHR             reduce using rule 59 (fline -> dtype numexp .)
+    IF              reduce using rule 59 (fline -> dtype numexp .)
+    IDVAR           reduce using rule 59 (fline -> dtype numexp .)
+    $end            reduce using rule 59 (fline -> dtype numexp .)
+    RCB             reduce using rule 59 (fline -> dtype numexp .)
+    INTEGER         reduce using rule 59 (fline -> dtype numexp .)
+    FLOAT           reduce using rule 59 (fline -> dtype numexp .)
+    CHAR            reduce using rule 59 (fline -> dtype numexp .)
+    TRUE            reduce using rule 59 (fline -> dtype numexp .)
+    FALSE           reduce using rule 59 (fline -> dtype numexp .)
+
+
+state 26
+
+    (36) varval -> var LBB . exp RBB
     (23) exp -> . exp PLUS term
     (24) exp -> . exp MINUS term
     (25) exp -> . term
@@ -555,85 +579,71 @@ state 25
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    STRING          shift and go to state 42
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    var                            shift and go to state 40
+    var                            shift and go to state 4
     exp                            shift and go to state 41
-    term                           shift and go to state 43
-    fact                           shift and go to state 44
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-
-state 26
-
-    (4) nline -> STR var . SCOLON
-
-    SCOLON          shift and go to state 52
-
+    term                           shift and go to state 42
+    fact                           shift and go to state 43
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
 
 state 27
 
-    (6) nline -> STR IDVAR . EQUAL strvar SCOLON
-    (38) var -> IDVAR .
-    (39) var -> IDVAR . LBB INTEGER RBB
-    (40) var -> IDVAR . LBB IDVAR RBB
+    (4) nline -> STR var . SCOLON
 
-    EQUAL           shift and go to state 53
-    SCOLON          reduce using rule 38 (var -> IDVAR .)
-    LBB             shift and go to state 29
+    SCOLON          shift and go to state 51
 
 
 state 28
 
-    (63) nline -> STR LBB . RBB IDVAR EQUAL arrt SCOLON
+    (6) nline -> STR IDVAR . EQUAL strvar SCOLON
+    (39) var -> IDVAR .
 
-    RBB             shift and go to state 54
+    EQUAL           shift and go to state 52
+    SCOLON          reduce using rule 39 (var -> IDVAR .)
 
 
 state 29
 
-    (39) var -> IDVAR LBB . INTEGER RBB
-    (40) var -> IDVAR LBB . IDVAR RBB
+    (62) nline -> STR LBB . RBB IDVAR EQUAL arrt SCOLON
 
-    INTEGER         shift and go to state 56
-    IDVAR           shift and go to state 55
+    RBB             shift and go to state 53
 
 
 state 30
 
     (7) nline -> BOOL MAIN . LPAREN RPAREN lcb line rcb
 
-    LPAREN          shift and go to state 57
+    LPAREN          shift and go to state 54
 
 
 state 31
 
     (8) nline -> RETURN LPAREN . bval RPAREN SCOLON
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
 
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
 
-    bval                           shift and go to state 58
+    bval                           shift and go to state 55
 
 state 32
 
     (10) nline -> EXIT LPAREN . RPAREN SCOLON
 
-    RPAREN          shift and go to state 59
+    RPAREN          shift and go to state 56
 
 
 state 33
@@ -654,54 +664,54 @@ state 33
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    STRING          shift and go to state 62
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    STRING          shift and go to state 59
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    pline                          shift and go to state 60
-    exp                            shift and go to state 61
-    term                           shift and go to state 43
-    fact                           shift and go to state 44
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    pline                          shift and go to state 57
+    exp                            shift and go to state 58
+    term                           shift and go to state 42
+    fact                           shift and go to state 43
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
 state 34
 
     (14) nline -> FOR LPAREN . fline bexp SCOLON assign RPAREN lcb line rcb
-    (60) fline -> . dtype numexp
-    (61) fline -> . numexp
-    (41) dtype -> . INT
-    (42) dtype -> . FLT
-    (43) dtype -> . CHR
-    (44) dtype -> . BOOL
+    (59) fline -> . dtype numexp
+    (60) fline -> . numexp
+    (40) dtype -> . INT
+    (41) dtype -> . FLT
+    (42) dtype -> . CHR
+    (43) dtype -> . BOOL
     (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
 
     INT             shift and go to state 16
     FLT             shift and go to state 17
     CHR             shift and go to state 18
-    BOOL            shift and go to state 65
+    BOOL            shift and go to state 62
     IDVAR           shift and go to state 7
 
-    fline                          shift and go to state 63
+    fline                          shift and go to state 60
     assign                         shift and go to state 14
-    dtype                          shift and go to state 64
+    dtype                          shift and go to state 61
     numexp                         shift and go to state 19
+    varval                         shift and go to state 21
     var                            shift and go to state 4
 
 state 35
@@ -732,10 +742,10 @@ state 35
 state 36
 
     (15) nline -> WHILE LPAREN . bexp RPAREN lcb line rcb
-    (47) bexp -> . bexp andor bexp2
-    (48) bexp -> . bexp2
-    (49) bexp2 -> . bexp2 rln exp
-    (50) bexp2 -> . exp
+    (46) bexp -> . bexp andor bexp2
+    (47) bexp -> . bexp2
+    (48) bexp2 -> . bexp2 rln exp
+    (49) bexp2 -> . exp
     (23) exp -> . exp PLUS term
     (24) exp -> . exp MINUS term
     (25) exp -> . term
@@ -749,35 +759,34 @@ state 36
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    bexp                           shift and go to state 66
-    bexp2                          shift and go to state 67
-    exp                            shift and go to state 68
-    term                           shift and go to state 43
-    fact                           shift and go to state 44
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    bexp                           shift and go to state 63
+    bexp2                          shift and go to state 64
+    exp                            shift and go to state 65
+    term                           shift and go to state 42
+    fact                           shift and go to state 43
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
 state 37
 
     (16) ifsts -> IF LPAREN . bexp RPAREN lcb line rcb elsests
-    (47) bexp -> . bexp andor bexp2
-    (48) bexp -> . bexp2
-    (49) bexp2 -> . bexp2 rln exp
-    (50) bexp2 -> . exp
+    (46) bexp -> . bexp andor bexp2
+    (47) bexp -> . bexp2
+    (48) bexp2 -> . bexp2 rln exp
+    (49) bexp2 -> . exp
     (23) exp -> . exp PLUS term
     (24) exp -> . exp MINUS term
     (25) exp -> . term
@@ -791,29 +800,65 @@ state 37
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    bexp                           shift and go to state 69
-    bexp2                          shift and go to state 67
-    exp                            shift and go to state 68
-    term                           shift and go to state 43
-    fact                           shift and go to state 44
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    bexp                           shift and go to state 66
+    bexp2                          shift and go to state 64
+    exp                            shift and go to state 65
+    term                           shift and go to state 42
+    fact                           shift and go to state 43
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
 state 38
+
+    (57) assign -> varval EQUAL . exp
+    (58) assign -> varval EQUAL . STRING
+    (23) exp -> . exp PLUS term
+    (24) exp -> . exp MINUS term
+    (25) exp -> . term
+    (26) term -> . term MUL fact
+    (27) term -> . term DIV fact
+    (28) term -> . term MOD fact
+    (29) term -> . fact
+    (30) fact -> . INTEGER
+    (31) fact -> . FLOAT
+    (32) fact -> . varval
+    (33) fact -> . bval
+    (34) fact -> . CHAR
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
+
+    STRING          shift and go to state 68
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+    IDVAR           shift and go to state 7
+
+    varval                         shift and go to state 46
+    exp                            shift and go to state 67
+    term                           shift and go to state 42
+    fact                           shift and go to state 43
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
+
+state 39
 
     (3) nline -> dtype var SCOLON .
 
@@ -833,64 +878,34 @@ state 38
     RCB             reduce using rule 3 (nline -> dtype var SCOLON .)
 
 
-state 39
-
-    (62) nline -> dtype LBB RBB . IDVAR EQUAL arrt SCOLON
-
-    IDVAR           shift and go to state 70
-
-
 state 40
 
-    (35) varval -> var .
+    (61) nline -> dtype LBB RBB . IDVAR EQUAL arrt SCOLON
 
-    MUL             reduce using rule 35 (varval -> var .)
-    DIV             reduce using rule 35 (varval -> var .)
-    MOD             reduce using rule 35 (varval -> var .)
-    PLUS            reduce using rule 35 (varval -> var .)
-    MINUS           reduce using rule 35 (varval -> var .)
-    SCOLON          reduce using rule 35 (varval -> var .)
-    RPAREN          reduce using rule 35 (varval -> var .)
-    DEQUAL          reduce using rule 35 (varval -> var .)
-    GTHEN           reduce using rule 35 (varval -> var .)
-    LTHEN           reduce using rule 35 (varval -> var .)
-    NOT             reduce using rule 35 (varval -> var .)
-    AND             reduce using rule 35 (varval -> var .)
-    OR              reduce using rule 35 (varval -> var .)
-    COM             reduce using rule 35 (varval -> var .)
-    RCB             reduce using rule 35 (varval -> var .)
+    IDVAR           shift and go to state 69
 
 
 state 41
 
-    (58) assign -> var EQUAL exp .
+    (36) varval -> var LBB exp . RBB
     (23) exp -> exp . PLUS term
     (24) exp -> exp . MINUS term
 
-    SCOLON          reduce using rule 58 (assign -> var EQUAL exp .)
-    RPAREN          reduce using rule 58 (assign -> var EQUAL exp .)
+    RBB             shift and go to state 70
     PLUS            shift and go to state 71
     MINUS           shift and go to state 72
 
 
 state 42
 
-    (59) assign -> var EQUAL STRING .
-
-    SCOLON          reduce using rule 59 (assign -> var EQUAL STRING .)
-    RPAREN          reduce using rule 59 (assign -> var EQUAL STRING .)
-
-
-state 43
-
     (25) exp -> term .
     (26) term -> term . MUL fact
     (27) term -> term . DIV fact
     (28) term -> term . MOD fact
 
+    RBB             reduce using rule 25 (exp -> term .)
     PLUS            reduce using rule 25 (exp -> term .)
     MINUS           reduce using rule 25 (exp -> term .)
-    SCOLON          reduce using rule 25 (exp -> term .)
     RPAREN          reduce using rule 25 (exp -> term .)
     DEQUAL          reduce using rule 25 (exp -> term .)
     GTHEN           reduce using rule 25 (exp -> term .)
@@ -898,21 +913,22 @@ state 43
     NOT             reduce using rule 25 (exp -> term .)
     AND             reduce using rule 25 (exp -> term .)
     OR              reduce using rule 25 (exp -> term .)
+    SCOLON          reduce using rule 25 (exp -> term .)
     MUL             shift and go to state 73
     DIV             shift and go to state 74
     MOD             shift and go to state 75
 
 
-state 44
+state 43
 
     (29) term -> fact .
 
     MUL             reduce using rule 29 (term -> fact .)
     DIV             reduce using rule 29 (term -> fact .)
     MOD             reduce using rule 29 (term -> fact .)
+    RBB             reduce using rule 29 (term -> fact .)
     PLUS            reduce using rule 29 (term -> fact .)
     MINUS           reduce using rule 29 (term -> fact .)
-    SCOLON          reduce using rule 29 (term -> fact .)
     RPAREN          reduce using rule 29 (term -> fact .)
     DEQUAL          reduce using rule 29 (term -> fact .)
     GTHEN           reduce using rule 29 (term -> fact .)
@@ -920,18 +936,19 @@ state 44
     NOT             reduce using rule 29 (term -> fact .)
     AND             reduce using rule 29 (term -> fact .)
     OR              reduce using rule 29 (term -> fact .)
+    SCOLON          reduce using rule 29 (term -> fact .)
 
 
-state 45
+state 44
 
     (30) fact -> INTEGER .
 
     MUL             reduce using rule 30 (fact -> INTEGER .)
     DIV             reduce using rule 30 (fact -> INTEGER .)
     MOD             reduce using rule 30 (fact -> INTEGER .)
+    RBB             reduce using rule 30 (fact -> INTEGER .)
     PLUS            reduce using rule 30 (fact -> INTEGER .)
     MINUS           reduce using rule 30 (fact -> INTEGER .)
-    SCOLON          reduce using rule 30 (fact -> INTEGER .)
     RPAREN          reduce using rule 30 (fact -> INTEGER .)
     DEQUAL          reduce using rule 30 (fact -> INTEGER .)
     GTHEN           reduce using rule 30 (fact -> INTEGER .)
@@ -939,20 +956,21 @@ state 45
     NOT             reduce using rule 30 (fact -> INTEGER .)
     AND             reduce using rule 30 (fact -> INTEGER .)
     OR              reduce using rule 30 (fact -> INTEGER .)
+    SCOLON          reduce using rule 30 (fact -> INTEGER .)
     COM             reduce using rule 30 (fact -> INTEGER .)
     RCB             reduce using rule 30 (fact -> INTEGER .)
 
 
-state 46
+state 45
 
     (31) fact -> FLOAT .
 
     MUL             reduce using rule 31 (fact -> FLOAT .)
     DIV             reduce using rule 31 (fact -> FLOAT .)
     MOD             reduce using rule 31 (fact -> FLOAT .)
+    RBB             reduce using rule 31 (fact -> FLOAT .)
     PLUS            reduce using rule 31 (fact -> FLOAT .)
     MINUS           reduce using rule 31 (fact -> FLOAT .)
-    SCOLON          reduce using rule 31 (fact -> FLOAT .)
     RPAREN          reduce using rule 31 (fact -> FLOAT .)
     DEQUAL          reduce using rule 31 (fact -> FLOAT .)
     GTHEN           reduce using rule 31 (fact -> FLOAT .)
@@ -960,20 +978,21 @@ state 46
     NOT             reduce using rule 31 (fact -> FLOAT .)
     AND             reduce using rule 31 (fact -> FLOAT .)
     OR              reduce using rule 31 (fact -> FLOAT .)
+    SCOLON          reduce using rule 31 (fact -> FLOAT .)
     COM             reduce using rule 31 (fact -> FLOAT .)
     RCB             reduce using rule 31 (fact -> FLOAT .)
 
 
-state 47
+state 46
 
     (32) fact -> varval .
 
     MUL             reduce using rule 32 (fact -> varval .)
     DIV             reduce using rule 32 (fact -> varval .)
     MOD             reduce using rule 32 (fact -> varval .)
+    RBB             reduce using rule 32 (fact -> varval .)
     PLUS            reduce using rule 32 (fact -> varval .)
     MINUS           reduce using rule 32 (fact -> varval .)
-    SCOLON          reduce using rule 32 (fact -> varval .)
     RPAREN          reduce using rule 32 (fact -> varval .)
     DEQUAL          reduce using rule 32 (fact -> varval .)
     GTHEN           reduce using rule 32 (fact -> varval .)
@@ -981,20 +1000,21 @@ state 47
     NOT             reduce using rule 32 (fact -> varval .)
     AND             reduce using rule 32 (fact -> varval .)
     OR              reduce using rule 32 (fact -> varval .)
+    SCOLON          reduce using rule 32 (fact -> varval .)
     COM             reduce using rule 32 (fact -> varval .)
     RCB             reduce using rule 32 (fact -> varval .)
 
 
-state 48
+state 47
 
     (33) fact -> bval .
 
     MUL             reduce using rule 33 (fact -> bval .)
     DIV             reduce using rule 33 (fact -> bval .)
     MOD             reduce using rule 33 (fact -> bval .)
+    RBB             reduce using rule 33 (fact -> bval .)
     PLUS            reduce using rule 33 (fact -> bval .)
     MINUS           reduce using rule 33 (fact -> bval .)
-    SCOLON          reduce using rule 33 (fact -> bval .)
     RPAREN          reduce using rule 33 (fact -> bval .)
     DEQUAL          reduce using rule 33 (fact -> bval .)
     GTHEN           reduce using rule 33 (fact -> bval .)
@@ -1002,20 +1022,21 @@ state 48
     NOT             reduce using rule 33 (fact -> bval .)
     AND             reduce using rule 33 (fact -> bval .)
     OR              reduce using rule 33 (fact -> bval .)
+    SCOLON          reduce using rule 33 (fact -> bval .)
     COM             reduce using rule 33 (fact -> bval .)
     RCB             reduce using rule 33 (fact -> bval .)
 
 
-state 49
+state 48
 
     (34) fact -> CHAR .
 
     MUL             reduce using rule 34 (fact -> CHAR .)
     DIV             reduce using rule 34 (fact -> CHAR .)
     MOD             reduce using rule 34 (fact -> CHAR .)
+    RBB             reduce using rule 34 (fact -> CHAR .)
     PLUS            reduce using rule 34 (fact -> CHAR .)
     MINUS           reduce using rule 34 (fact -> CHAR .)
-    SCOLON          reduce using rule 34 (fact -> CHAR .)
     RPAREN          reduce using rule 34 (fact -> CHAR .)
     DEQUAL          reduce using rule 34 (fact -> CHAR .)
     GTHEN           reduce using rule 34 (fact -> CHAR .)
@@ -1023,53 +1044,56 @@ state 49
     NOT             reduce using rule 34 (fact -> CHAR .)
     AND             reduce using rule 34 (fact -> CHAR .)
     OR              reduce using rule 34 (fact -> CHAR .)
+    SCOLON          reduce using rule 34 (fact -> CHAR .)
     COM             reduce using rule 34 (fact -> CHAR .)
     RCB             reduce using rule 34 (fact -> CHAR .)
 
 
+state 49
+
+    (37) bval -> TRUE .
+
+    MUL             reduce using rule 37 (bval -> TRUE .)
+    DIV             reduce using rule 37 (bval -> TRUE .)
+    MOD             reduce using rule 37 (bval -> TRUE .)
+    RBB             reduce using rule 37 (bval -> TRUE .)
+    PLUS            reduce using rule 37 (bval -> TRUE .)
+    MINUS           reduce using rule 37 (bval -> TRUE .)
+    RPAREN          reduce using rule 37 (bval -> TRUE .)
+    DEQUAL          reduce using rule 37 (bval -> TRUE .)
+    GTHEN           reduce using rule 37 (bval -> TRUE .)
+    LTHEN           reduce using rule 37 (bval -> TRUE .)
+    NOT             reduce using rule 37 (bval -> TRUE .)
+    AND             reduce using rule 37 (bval -> TRUE .)
+    OR              reduce using rule 37 (bval -> TRUE .)
+    SCOLON          reduce using rule 37 (bval -> TRUE .)
+    COM             reduce using rule 37 (bval -> TRUE .)
+    RCB             reduce using rule 37 (bval -> TRUE .)
+
+
 state 50
 
-    (36) bval -> TRUE .
+    (38) bval -> FALSE .
 
-    MUL             reduce using rule 36 (bval -> TRUE .)
-    DIV             reduce using rule 36 (bval -> TRUE .)
-    MOD             reduce using rule 36 (bval -> TRUE .)
-    PLUS            reduce using rule 36 (bval -> TRUE .)
-    MINUS           reduce using rule 36 (bval -> TRUE .)
-    SCOLON          reduce using rule 36 (bval -> TRUE .)
-    RPAREN          reduce using rule 36 (bval -> TRUE .)
-    DEQUAL          reduce using rule 36 (bval -> TRUE .)
-    GTHEN           reduce using rule 36 (bval -> TRUE .)
-    LTHEN           reduce using rule 36 (bval -> TRUE .)
-    NOT             reduce using rule 36 (bval -> TRUE .)
-    AND             reduce using rule 36 (bval -> TRUE .)
-    OR              reduce using rule 36 (bval -> TRUE .)
-    COM             reduce using rule 36 (bval -> TRUE .)
-    RCB             reduce using rule 36 (bval -> TRUE .)
+    MUL             reduce using rule 38 (bval -> FALSE .)
+    DIV             reduce using rule 38 (bval -> FALSE .)
+    MOD             reduce using rule 38 (bval -> FALSE .)
+    RBB             reduce using rule 38 (bval -> FALSE .)
+    PLUS            reduce using rule 38 (bval -> FALSE .)
+    MINUS           reduce using rule 38 (bval -> FALSE .)
+    RPAREN          reduce using rule 38 (bval -> FALSE .)
+    DEQUAL          reduce using rule 38 (bval -> FALSE .)
+    GTHEN           reduce using rule 38 (bval -> FALSE .)
+    LTHEN           reduce using rule 38 (bval -> FALSE .)
+    NOT             reduce using rule 38 (bval -> FALSE .)
+    AND             reduce using rule 38 (bval -> FALSE .)
+    OR              reduce using rule 38 (bval -> FALSE .)
+    SCOLON          reduce using rule 38 (bval -> FALSE .)
+    COM             reduce using rule 38 (bval -> FALSE .)
+    RCB             reduce using rule 38 (bval -> FALSE .)
 
 
 state 51
-
-    (37) bval -> FALSE .
-
-    MUL             reduce using rule 37 (bval -> FALSE .)
-    DIV             reduce using rule 37 (bval -> FALSE .)
-    MOD             reduce using rule 37 (bval -> FALSE .)
-    PLUS            reduce using rule 37 (bval -> FALSE .)
-    MINUS           reduce using rule 37 (bval -> FALSE .)
-    SCOLON          reduce using rule 37 (bval -> FALSE .)
-    RPAREN          reduce using rule 37 (bval -> FALSE .)
-    DEQUAL          reduce using rule 37 (bval -> FALSE .)
-    GTHEN           reduce using rule 37 (bval -> FALSE .)
-    LTHEN           reduce using rule 37 (bval -> FALSE .)
-    NOT             reduce using rule 37 (bval -> FALSE .)
-    AND             reduce using rule 37 (bval -> FALSE .)
-    OR              reduce using rule 37 (bval -> FALSE .)
-    COM             reduce using rule 37 (bval -> FALSE .)
-    RCB             reduce using rule 37 (bval -> FALSE .)
-
-
-state 52
 
     (4) nline -> STR var SCOLON .
 
@@ -1089,73 +1113,58 @@ state 52
     RCB             reduce using rule 4 (nline -> STR var SCOLON .)
 
 
-state 53
+state 52
 
     (6) nline -> STR IDVAR EQUAL . strvar SCOLON
-    (45) strvar -> . STRING
-    (46) strvar -> . varval
+    (44) strvar -> . STRING
+    (45) strvar -> . varval
     (35) varval -> . var
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
 
     STRING          shift and go to state 77
     IDVAR           shift and go to state 7
 
     strvar                         shift and go to state 76
     varval                         shift and go to state 78
-    var                            shift and go to state 40
+    var                            shift and go to state 4
 
-state 54
+state 53
 
-    (63) nline -> STR LBB RBB . IDVAR EQUAL arrt SCOLON
+    (62) nline -> STR LBB RBB . IDVAR EQUAL arrt SCOLON
 
     IDVAR           shift and go to state 79
 
 
+state 54
+
+    (7) nline -> BOOL MAIN LPAREN . RPAREN lcb line rcb
+
+    RPAREN          shift and go to state 80
+
+
 state 55
 
-    (40) var -> IDVAR LBB IDVAR . RBB
+    (8) nline -> RETURN LPAREN bval . RPAREN SCOLON
 
-    RBB             shift and go to state 80
+    RPAREN          shift and go to state 81
 
 
 state 56
 
-    (39) var -> IDVAR LBB INTEGER . RBB
+    (10) nline -> EXIT LPAREN RPAREN . SCOLON
 
-    RBB             shift and go to state 81
+    SCOLON          shift and go to state 82
 
 
 state 57
 
-    (7) nline -> BOOL MAIN LPAREN . RPAREN lcb line rcb
-
-    RPAREN          shift and go to state 82
-
-
-state 58
-
-    (8) nline -> RETURN LPAREN bval . RPAREN SCOLON
+    (11) nline -> PRINT LPAREN pline . RPAREN SCOLON
 
     RPAREN          shift and go to state 83
 
 
-state 59
-
-    (10) nline -> EXIT LPAREN RPAREN . SCOLON
-
-    SCOLON          shift and go to state 84
-
-
-state 60
-
-    (11) nline -> PRINT LPAREN pline . RPAREN SCOLON
-
-    RPAREN          shift and go to state 85
-
-
-state 61
+state 58
 
     (12) pline -> exp .
     (23) exp -> exp . PLUS term
@@ -1166,20 +1175,20 @@ state 61
     MINUS           shift and go to state 72
 
 
-state 62
+state 59
 
     (13) pline -> STRING .
 
     RPAREN          reduce using rule 13 (pline -> STRING .)
 
 
-state 63
+state 60
 
     (14) nline -> FOR LPAREN fline . bexp SCOLON assign RPAREN lcb line rcb
-    (47) bexp -> . bexp andor bexp2
-    (48) bexp -> . bexp2
-    (49) bexp2 -> . bexp2 rln exp
-    (50) bexp2 -> . exp
+    (46) bexp -> . bexp andor bexp2
+    (47) bexp -> . bexp2
+    (48) bexp2 -> . bexp2 rln exp
+    (49) bexp2 -> . exp
     (23) exp -> . exp PLUS term
     (24) exp -> . exp MINUS term
     (25) exp -> . term
@@ -1193,120 +1202,163 @@ state 63
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    bexp                           shift and go to state 86
-    bexp2                          shift and go to state 67
-    exp                            shift and go to state 68
-    term                           shift and go to state 43
-    fact                           shift and go to state 44
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    bexp                           shift and go to state 84
+    bexp2                          shift and go to state 64
+    exp                            shift and go to state 65
+    term                           shift and go to state 42
+    fact                           shift and go to state 43
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
+
+state 61
+
+    (59) fline -> dtype . numexp
+    (22) numexp -> . assign SCOLON
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
+
+    IDVAR           shift and go to state 7
+
+    numexp                         shift and go to state 25
+    assign                         shift and go to state 14
+    varval                         shift and go to state 21
+    var                            shift and go to state 4
+
+state 62
+
+    (43) dtype -> BOOL .
+
+    IDVAR           reduce using rule 43 (dtype -> BOOL .)
+
+
+state 63
+
+    (15) nline -> WHILE LPAREN bexp . RPAREN lcb line rcb
+    (46) bexp -> bexp . andor bexp2
+    (54) andor -> . AND
+    (55) andor -> . OR
+
+    RPAREN          shift and go to state 85
+    AND             shift and go to state 87
+    OR              shift and go to state 88
+
+    andor                          shift and go to state 86
 
 state 64
 
-    (60) fline -> dtype . numexp
-    (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (47) bexp -> bexp2 .
+    (48) bexp2 -> bexp2 . rln exp
+    (50) rln -> . DEQUAL
+    (51) rln -> . GTHEN
+    (52) rln -> . LTHEN
+    (53) rln -> . NOT
 
-    IDVAR           shift and go to state 7
+    RPAREN          reduce using rule 47 (bexp -> bexp2 .)
+    AND             reduce using rule 47 (bexp -> bexp2 .)
+    OR              reduce using rule 47 (bexp -> bexp2 .)
+    SCOLON          reduce using rule 47 (bexp -> bexp2 .)
+    DEQUAL          shift and go to state 90
+    GTHEN           shift and go to state 91
+    LTHEN           shift and go to state 92
+    NOT             shift and go to state 93
 
-    numexp                         shift and go to state 24
-    assign                         shift and go to state 14
-    var                            shift and go to state 4
+    rln                            shift and go to state 89
 
 state 65
 
-    (44) dtype -> BOOL .
-
-    IDVAR           reduce using rule 44 (dtype -> BOOL .)
-
-
-state 66
-
-    (15) nline -> WHILE LPAREN bexp . RPAREN lcb line rcb
-    (47) bexp -> bexp . andor bexp2
-    (55) andor -> . AND
-    (56) andor -> . OR
-
-    RPAREN          shift and go to state 87
-    AND             shift and go to state 89
-    OR              shift and go to state 90
-
-    andor                          shift and go to state 88
-
-state 67
-
-    (48) bexp -> bexp2 .
-    (49) bexp2 -> bexp2 . rln exp
-    (51) rln -> . DEQUAL
-    (52) rln -> . GTHEN
-    (53) rln -> . LTHEN
-    (54) rln -> . NOT
-
-    RPAREN          reduce using rule 48 (bexp -> bexp2 .)
-    AND             reduce using rule 48 (bexp -> bexp2 .)
-    OR              reduce using rule 48 (bexp -> bexp2 .)
-    SCOLON          reduce using rule 48 (bexp -> bexp2 .)
-    DEQUAL          shift and go to state 92
-    GTHEN           shift and go to state 93
-    LTHEN           shift and go to state 94
-    NOT             shift and go to state 95
-
-    rln                            shift and go to state 91
-
-state 68
-
-    (50) bexp2 -> exp .
+    (49) bexp2 -> exp .
     (23) exp -> exp . PLUS term
     (24) exp -> exp . MINUS term
 
-    DEQUAL          reduce using rule 50 (bexp2 -> exp .)
-    GTHEN           reduce using rule 50 (bexp2 -> exp .)
-    LTHEN           reduce using rule 50 (bexp2 -> exp .)
-    NOT             reduce using rule 50 (bexp2 -> exp .)
-    RPAREN          reduce using rule 50 (bexp2 -> exp .)
-    AND             reduce using rule 50 (bexp2 -> exp .)
-    OR              reduce using rule 50 (bexp2 -> exp .)
-    SCOLON          reduce using rule 50 (bexp2 -> exp .)
+    DEQUAL          reduce using rule 49 (bexp2 -> exp .)
+    GTHEN           reduce using rule 49 (bexp2 -> exp .)
+    LTHEN           reduce using rule 49 (bexp2 -> exp .)
+    NOT             reduce using rule 49 (bexp2 -> exp .)
+    RPAREN          reduce using rule 49 (bexp2 -> exp .)
+    AND             reduce using rule 49 (bexp2 -> exp .)
+    OR              reduce using rule 49 (bexp2 -> exp .)
+    SCOLON          reduce using rule 49 (bexp2 -> exp .)
     PLUS            shift and go to state 71
     MINUS           shift and go to state 72
 
 
-state 69
+state 66
 
     (16) ifsts -> IF LPAREN bexp . RPAREN lcb line rcb elsests
-    (47) bexp -> bexp . andor bexp2
-    (55) andor -> . AND
-    (56) andor -> . OR
+    (46) bexp -> bexp . andor bexp2
+    (54) andor -> . AND
+    (55) andor -> . OR
 
-    RPAREN          shift and go to state 96
-    AND             shift and go to state 89
-    OR              shift and go to state 90
+    RPAREN          shift and go to state 94
+    AND             shift and go to state 87
+    OR              shift and go to state 88
 
-    andor                          shift and go to state 88
+    andor                          shift and go to state 86
+
+state 67
+
+    (57) assign -> varval EQUAL exp .
+    (23) exp -> exp . PLUS term
+    (24) exp -> exp . MINUS term
+
+    SCOLON          reduce using rule 57 (assign -> varval EQUAL exp .)
+    RPAREN          reduce using rule 57 (assign -> varval EQUAL exp .)
+    PLUS            shift and go to state 71
+    MINUS           shift and go to state 72
+
+
+state 68
+
+    (58) assign -> varval EQUAL STRING .
+
+    SCOLON          reduce using rule 58 (assign -> varval EQUAL STRING .)
+    RPAREN          reduce using rule 58 (assign -> varval EQUAL STRING .)
+
+
+state 69
+
+    (61) nline -> dtype LBB RBB IDVAR . EQUAL arrt SCOLON
+
+    EQUAL           shift and go to state 95
+
 
 state 70
 
-    (62) nline -> dtype LBB RBB IDVAR . EQUAL arrt SCOLON
+    (36) varval -> var LBB exp RBB .
 
-    EQUAL           shift and go to state 97
+    EQUAL           reduce using rule 36 (varval -> var LBB exp RBB .)
+    MUL             reduce using rule 36 (varval -> var LBB exp RBB .)
+    DIV             reduce using rule 36 (varval -> var LBB exp RBB .)
+    MOD             reduce using rule 36 (varval -> var LBB exp RBB .)
+    RBB             reduce using rule 36 (varval -> var LBB exp RBB .)
+    PLUS            reduce using rule 36 (varval -> var LBB exp RBB .)
+    MINUS           reduce using rule 36 (varval -> var LBB exp RBB .)
+    RPAREN          reduce using rule 36 (varval -> var LBB exp RBB .)
+    DEQUAL          reduce using rule 36 (varval -> var LBB exp RBB .)
+    GTHEN           reduce using rule 36 (varval -> var LBB exp RBB .)
+    LTHEN           reduce using rule 36 (varval -> var LBB exp RBB .)
+    NOT             reduce using rule 36 (varval -> var LBB exp RBB .)
+    AND             reduce using rule 36 (varval -> var LBB exp RBB .)
+    OR              reduce using rule 36 (varval -> var LBB exp RBB .)
+    SCOLON          reduce using rule 36 (varval -> var LBB exp RBB .)
+    COM             reduce using rule 36 (varval -> var LBB exp RBB .)
+    RCB             reduce using rule 36 (varval -> var LBB exp RBB .)
 
 
 state 71
@@ -1322,24 +1374,23 @@ state 71
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    term                           shift and go to state 98
-    fact                           shift and go to state 44
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    term                           shift and go to state 96
+    fact                           shift and go to state 43
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
 state 72
 
@@ -1354,24 +1405,23 @@ state 72
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    term                           shift and go to state 99
-    fact                           shift and go to state 44
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    term                           shift and go to state 97
+    fact                           shift and go to state 43
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
 state 73
 
@@ -1382,23 +1432,22 @@ state 73
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    fact                           shift and go to state 100
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    fact                           shift and go to state 98
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
 state 74
 
@@ -1409,23 +1458,22 @@ state 74
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    fact                           shift and go to state 101
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    fact                           shift and go to state 99
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
 state 75
 
@@ -1436,113 +1484,68 @@ state 75
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    fact                           shift and go to state 102
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    fact                           shift and go to state 100
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
 state 76
 
     (6) nline -> STR IDVAR EQUAL strvar . SCOLON
 
-    SCOLON          shift and go to state 103
+    SCOLON          shift and go to state 101
 
 
 state 77
 
-    (45) strvar -> STRING .
+    (44) strvar -> STRING .
 
-    SCOLON          reduce using rule 45 (strvar -> STRING .)
+    SCOLON          reduce using rule 44 (strvar -> STRING .)
 
 
 state 78
 
-    (46) strvar -> varval .
+    (45) strvar -> varval .
 
-    SCOLON          reduce using rule 46 (strvar -> varval .)
+    SCOLON          reduce using rule 45 (strvar -> varval .)
 
 
 state 79
 
-    (63) nline -> STR LBB RBB IDVAR . EQUAL arrt SCOLON
+    (62) nline -> STR LBB RBB IDVAR . EQUAL arrt SCOLON
 
-    EQUAL           shift and go to state 104
+    EQUAL           shift and go to state 102
 
 
 state 80
 
-    (40) var -> IDVAR LBB IDVAR RBB .
-
-    EQUAL           reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    SCOLON          reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    MUL             reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    DIV             reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    MOD             reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    PLUS            reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    MINUS           reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    RPAREN          reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    DEQUAL          reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    GTHEN           reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    LTHEN           reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    NOT             reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    AND             reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    OR              reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    COM             reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-    RCB             reduce using rule 40 (var -> IDVAR LBB IDVAR RBB .)
-
-
-state 81
-
-    (39) var -> IDVAR LBB INTEGER RBB .
-
-    EQUAL           reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    SCOLON          reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    MUL             reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    DIV             reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    MOD             reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    PLUS            reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    MINUS           reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    RPAREN          reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    DEQUAL          reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    GTHEN           reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    LTHEN           reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    NOT             reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    AND             reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    OR              reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    COM             reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-    RCB             reduce using rule 39 (var -> IDVAR LBB INTEGER RBB .)
-
-
-state 82
-
     (7) nline -> BOOL MAIN LPAREN RPAREN . lcb line rcb
     (18) lcb -> . LCB
 
-    LCB             shift and go to state 106
+    LCB             shift and go to state 104
 
-    lcb                            shift and go to state 105
+    lcb                            shift and go to state 103
 
-state 83
+state 81
 
     (8) nline -> RETURN LPAREN bval RPAREN . SCOLON
 
-    SCOLON          shift and go to state 107
+    SCOLON          shift and go to state 105
 
 
-state 84
+state 82
 
     (10) nline -> EXIT LPAREN RPAREN SCOLON .
 
@@ -1562,40 +1565,40 @@ state 84
     RCB             reduce using rule 10 (nline -> EXIT LPAREN RPAREN SCOLON .)
 
 
-state 85
+state 83
 
     (11) nline -> PRINT LPAREN pline RPAREN . SCOLON
 
-    SCOLON          shift and go to state 108
+    SCOLON          shift and go to state 106
 
 
-state 86
+state 84
 
     (14) nline -> FOR LPAREN fline bexp . SCOLON assign RPAREN lcb line rcb
-    (47) bexp -> bexp . andor bexp2
-    (55) andor -> . AND
-    (56) andor -> . OR
+    (46) bexp -> bexp . andor bexp2
+    (54) andor -> . AND
+    (55) andor -> . OR
 
-    SCOLON          shift and go to state 109
-    AND             shift and go to state 89
-    OR              shift and go to state 90
+    SCOLON          shift and go to state 107
+    AND             shift and go to state 87
+    OR              shift and go to state 88
 
-    andor                          shift and go to state 88
+    andor                          shift and go to state 86
 
-state 87
+state 85
 
     (15) nline -> WHILE LPAREN bexp RPAREN . lcb line rcb
     (18) lcb -> . LCB
 
-    LCB             shift and go to state 106
+    LCB             shift and go to state 104
 
-    lcb                            shift and go to state 110
+    lcb                            shift and go to state 108
 
-state 88
+state 86
 
-    (47) bexp -> bexp andor . bexp2
-    (49) bexp2 -> . bexp2 rln exp
-    (50) bexp2 -> . exp
+    (46) bexp -> bexp andor . bexp2
+    (48) bexp2 -> . bexp2 rln exp
+    (49) bexp2 -> . exp
     (23) exp -> . exp PLUS term
     (24) exp -> . exp MINUS term
     (25) exp -> . term
@@ -1609,169 +1612,165 @@ state 88
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    bexp2                          shift and go to state 111
-    exp                            shift and go to state 68
-    term                           shift and go to state 43
-    fact                           shift and go to state 44
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    bexp2                          shift and go to state 109
+    exp                            shift and go to state 65
+    term                           shift and go to state 42
+    fact                           shift and go to state 43
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
+
+state 87
+
+    (54) andor -> AND .
+
+    INTEGER         reduce using rule 54 (andor -> AND .)
+    FLOAT           reduce using rule 54 (andor -> AND .)
+    CHAR            reduce using rule 54 (andor -> AND .)
+    TRUE            reduce using rule 54 (andor -> AND .)
+    FALSE           reduce using rule 54 (andor -> AND .)
+    IDVAR           reduce using rule 54 (andor -> AND .)
+
+
+state 88
+
+    (55) andor -> OR .
+
+    INTEGER         reduce using rule 55 (andor -> OR .)
+    FLOAT           reduce using rule 55 (andor -> OR .)
+    CHAR            reduce using rule 55 (andor -> OR .)
+    TRUE            reduce using rule 55 (andor -> OR .)
+    FALSE           reduce using rule 55 (andor -> OR .)
+    IDVAR           reduce using rule 55 (andor -> OR .)
+
 
 state 89
 
-    (55) andor -> AND .
+    (48) bexp2 -> bexp2 rln . exp
+    (23) exp -> . exp PLUS term
+    (24) exp -> . exp MINUS term
+    (25) exp -> . term
+    (26) term -> . term MUL fact
+    (27) term -> . term DIV fact
+    (28) term -> . term MOD fact
+    (29) term -> . fact
+    (30) fact -> . INTEGER
+    (31) fact -> . FLOAT
+    (32) fact -> . varval
+    (33) fact -> . bval
+    (34) fact -> . CHAR
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    INTEGER         reduce using rule 55 (andor -> AND .)
-    FLOAT           reduce using rule 55 (andor -> AND .)
-    CHAR            reduce using rule 55 (andor -> AND .)
-    TRUE            reduce using rule 55 (andor -> AND .)
-    FALSE           reduce using rule 55 (andor -> AND .)
-    IDVAR           reduce using rule 55 (andor -> AND .)
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
+    IDVAR           shift and go to state 7
 
+    exp                            shift and go to state 110
+    term                           shift and go to state 42
+    fact                           shift and go to state 43
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
 state 90
 
-    (56) andor -> OR .
+    (50) rln -> DEQUAL .
 
-    INTEGER         reduce using rule 56 (andor -> OR .)
-    FLOAT           reduce using rule 56 (andor -> OR .)
-    CHAR            reduce using rule 56 (andor -> OR .)
-    TRUE            reduce using rule 56 (andor -> OR .)
-    FALSE           reduce using rule 56 (andor -> OR .)
-    IDVAR           reduce using rule 56 (andor -> OR .)
+    INTEGER         reduce using rule 50 (rln -> DEQUAL .)
+    FLOAT           reduce using rule 50 (rln -> DEQUAL .)
+    CHAR            reduce using rule 50 (rln -> DEQUAL .)
+    TRUE            reduce using rule 50 (rln -> DEQUAL .)
+    FALSE           reduce using rule 50 (rln -> DEQUAL .)
+    IDVAR           reduce using rule 50 (rln -> DEQUAL .)
 
 
 state 91
 
-    (49) bexp2 -> bexp2 rln . exp
-    (23) exp -> . exp PLUS term
-    (24) exp -> . exp MINUS term
-    (25) exp -> . term
-    (26) term -> . term MUL fact
-    (27) term -> . term DIV fact
-    (28) term -> . term MOD fact
-    (29) term -> . fact
-    (30) fact -> . INTEGER
-    (31) fact -> . FLOAT
-    (32) fact -> . varval
-    (33) fact -> . bval
-    (34) fact -> . CHAR
-    (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (51) rln -> GTHEN .
 
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
-    IDVAR           shift and go to state 7
+    INTEGER         reduce using rule 51 (rln -> GTHEN .)
+    FLOAT           reduce using rule 51 (rln -> GTHEN .)
+    CHAR            reduce using rule 51 (rln -> GTHEN .)
+    TRUE            reduce using rule 51 (rln -> GTHEN .)
+    FALSE           reduce using rule 51 (rln -> GTHEN .)
+    IDVAR           reduce using rule 51 (rln -> GTHEN .)
 
-    exp                            shift and go to state 112
-    term                           shift and go to state 43
-    fact                           shift and go to state 44
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
 
 state 92
 
-    (51) rln -> DEQUAL .
+    (52) rln -> LTHEN .
 
-    INTEGER         reduce using rule 51 (rln -> DEQUAL .)
-    FLOAT           reduce using rule 51 (rln -> DEQUAL .)
-    CHAR            reduce using rule 51 (rln -> DEQUAL .)
-    TRUE            reduce using rule 51 (rln -> DEQUAL .)
-    FALSE           reduce using rule 51 (rln -> DEQUAL .)
-    IDVAR           reduce using rule 51 (rln -> DEQUAL .)
+    INTEGER         reduce using rule 52 (rln -> LTHEN .)
+    FLOAT           reduce using rule 52 (rln -> LTHEN .)
+    CHAR            reduce using rule 52 (rln -> LTHEN .)
+    TRUE            reduce using rule 52 (rln -> LTHEN .)
+    FALSE           reduce using rule 52 (rln -> LTHEN .)
+    IDVAR           reduce using rule 52 (rln -> LTHEN .)
 
 
 state 93
 
-    (52) rln -> GTHEN .
+    (53) rln -> NOT .
 
-    INTEGER         reduce using rule 52 (rln -> GTHEN .)
-    FLOAT           reduce using rule 52 (rln -> GTHEN .)
-    CHAR            reduce using rule 52 (rln -> GTHEN .)
-    TRUE            reduce using rule 52 (rln -> GTHEN .)
-    FALSE           reduce using rule 52 (rln -> GTHEN .)
-    IDVAR           reduce using rule 52 (rln -> GTHEN .)
+    INTEGER         reduce using rule 53 (rln -> NOT .)
+    FLOAT           reduce using rule 53 (rln -> NOT .)
+    CHAR            reduce using rule 53 (rln -> NOT .)
+    TRUE            reduce using rule 53 (rln -> NOT .)
+    FALSE           reduce using rule 53 (rln -> NOT .)
+    IDVAR           reduce using rule 53 (rln -> NOT .)
 
 
 state 94
 
-    (53) rln -> LTHEN .
-
-    INTEGER         reduce using rule 53 (rln -> LTHEN .)
-    FLOAT           reduce using rule 53 (rln -> LTHEN .)
-    CHAR            reduce using rule 53 (rln -> LTHEN .)
-    TRUE            reduce using rule 53 (rln -> LTHEN .)
-    FALSE           reduce using rule 53 (rln -> LTHEN .)
-    IDVAR           reduce using rule 53 (rln -> LTHEN .)
-
-
-state 95
-
-    (54) rln -> NOT .
-
-    INTEGER         reduce using rule 54 (rln -> NOT .)
-    FLOAT           reduce using rule 54 (rln -> NOT .)
-    CHAR            reduce using rule 54 (rln -> NOT .)
-    TRUE            reduce using rule 54 (rln -> NOT .)
-    FALSE           reduce using rule 54 (rln -> NOT .)
-    IDVAR           reduce using rule 54 (rln -> NOT .)
-
-
-state 96
-
     (16) ifsts -> IF LPAREN bexp RPAREN . lcb line rcb elsests
     (18) lcb -> . LCB
 
-    LCB             shift and go to state 106
+    LCB             shift and go to state 104
 
-    lcb                            shift and go to state 113
+    lcb                            shift and go to state 111
 
-state 97
+state 95
 
-    (62) nline -> dtype LBB RBB IDVAR EQUAL . arrt SCOLON
-    (64) arrt -> . var
-    (65) arrt -> . LCB dws RCB
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (61) nline -> dtype LBB RBB IDVAR EQUAL . arrt SCOLON
+    (63) arrt -> . var
+    (64) arrt -> . LCB dws RCB
+    (39) var -> . IDVAR
 
-    LCB             shift and go to state 116
+    LCB             shift and go to state 114
     IDVAR           shift and go to state 7
 
-    arrt                           shift and go to state 114
-    var                            shift and go to state 115
+    arrt                           shift and go to state 112
+    var                            shift and go to state 113
 
-state 98
+state 96
 
     (23) exp -> exp PLUS term .
     (26) term -> term . MUL fact
     (27) term -> term . DIV fact
     (28) term -> term . MOD fact
 
+    RBB             reduce using rule 23 (exp -> exp PLUS term .)
     PLUS            reduce using rule 23 (exp -> exp PLUS term .)
     MINUS           reduce using rule 23 (exp -> exp PLUS term .)
-    SCOLON          reduce using rule 23 (exp -> exp PLUS term .)
     RPAREN          reduce using rule 23 (exp -> exp PLUS term .)
     DEQUAL          reduce using rule 23 (exp -> exp PLUS term .)
     GTHEN           reduce using rule 23 (exp -> exp PLUS term .)
@@ -1779,21 +1778,22 @@ state 98
     NOT             reduce using rule 23 (exp -> exp PLUS term .)
     AND             reduce using rule 23 (exp -> exp PLUS term .)
     OR              reduce using rule 23 (exp -> exp PLUS term .)
+    SCOLON          reduce using rule 23 (exp -> exp PLUS term .)
     MUL             shift and go to state 73
     DIV             shift and go to state 74
     MOD             shift and go to state 75
 
 
-state 99
+state 97
 
     (24) exp -> exp MINUS term .
     (26) term -> term . MUL fact
     (27) term -> term . DIV fact
     (28) term -> term . MOD fact
 
+    RBB             reduce using rule 24 (exp -> exp MINUS term .)
     PLUS            reduce using rule 24 (exp -> exp MINUS term .)
     MINUS           reduce using rule 24 (exp -> exp MINUS term .)
-    SCOLON          reduce using rule 24 (exp -> exp MINUS term .)
     RPAREN          reduce using rule 24 (exp -> exp MINUS term .)
     DEQUAL          reduce using rule 24 (exp -> exp MINUS term .)
     GTHEN           reduce using rule 24 (exp -> exp MINUS term .)
@@ -1801,21 +1801,22 @@ state 99
     NOT             reduce using rule 24 (exp -> exp MINUS term .)
     AND             reduce using rule 24 (exp -> exp MINUS term .)
     OR              reduce using rule 24 (exp -> exp MINUS term .)
+    SCOLON          reduce using rule 24 (exp -> exp MINUS term .)
     MUL             shift and go to state 73
     DIV             shift and go to state 74
     MOD             shift and go to state 75
 
 
-state 100
+state 98
 
     (26) term -> term MUL fact .
 
     MUL             reduce using rule 26 (term -> term MUL fact .)
     DIV             reduce using rule 26 (term -> term MUL fact .)
     MOD             reduce using rule 26 (term -> term MUL fact .)
+    RBB             reduce using rule 26 (term -> term MUL fact .)
     PLUS            reduce using rule 26 (term -> term MUL fact .)
     MINUS           reduce using rule 26 (term -> term MUL fact .)
-    SCOLON          reduce using rule 26 (term -> term MUL fact .)
     RPAREN          reduce using rule 26 (term -> term MUL fact .)
     DEQUAL          reduce using rule 26 (term -> term MUL fact .)
     GTHEN           reduce using rule 26 (term -> term MUL fact .)
@@ -1823,18 +1824,19 @@ state 100
     NOT             reduce using rule 26 (term -> term MUL fact .)
     AND             reduce using rule 26 (term -> term MUL fact .)
     OR              reduce using rule 26 (term -> term MUL fact .)
+    SCOLON          reduce using rule 26 (term -> term MUL fact .)
 
 
-state 101
+state 99
 
     (27) term -> term DIV fact .
 
     MUL             reduce using rule 27 (term -> term DIV fact .)
     DIV             reduce using rule 27 (term -> term DIV fact .)
     MOD             reduce using rule 27 (term -> term DIV fact .)
+    RBB             reduce using rule 27 (term -> term DIV fact .)
     PLUS            reduce using rule 27 (term -> term DIV fact .)
     MINUS           reduce using rule 27 (term -> term DIV fact .)
-    SCOLON          reduce using rule 27 (term -> term DIV fact .)
     RPAREN          reduce using rule 27 (term -> term DIV fact .)
     DEQUAL          reduce using rule 27 (term -> term DIV fact .)
     GTHEN           reduce using rule 27 (term -> term DIV fact .)
@@ -1842,18 +1844,19 @@ state 101
     NOT             reduce using rule 27 (term -> term DIV fact .)
     AND             reduce using rule 27 (term -> term DIV fact .)
     OR              reduce using rule 27 (term -> term DIV fact .)
+    SCOLON          reduce using rule 27 (term -> term DIV fact .)
 
 
-state 102
+state 100
 
     (28) term -> term MOD fact .
 
     MUL             reduce using rule 28 (term -> term MOD fact .)
     DIV             reduce using rule 28 (term -> term MOD fact .)
     MOD             reduce using rule 28 (term -> term MOD fact .)
+    RBB             reduce using rule 28 (term -> term MOD fact .)
     PLUS            reduce using rule 28 (term -> term MOD fact .)
     MINUS           reduce using rule 28 (term -> term MOD fact .)
-    SCOLON          reduce using rule 28 (term -> term MOD fact .)
     RPAREN          reduce using rule 28 (term -> term MOD fact .)
     DEQUAL          reduce using rule 28 (term -> term MOD fact .)
     GTHEN           reduce using rule 28 (term -> term MOD fact .)
@@ -1861,9 +1864,10 @@ state 102
     NOT             reduce using rule 28 (term -> term MOD fact .)
     AND             reduce using rule 28 (term -> term MOD fact .)
     OR              reduce using rule 28 (term -> term MOD fact .)
+    SCOLON          reduce using rule 28 (term -> term MOD fact .)
 
 
-state 103
+state 101
 
     (6) nline -> STR IDVAR EQUAL strvar SCOLON .
 
@@ -1883,22 +1887,20 @@ state 103
     RCB             reduce using rule 6 (nline -> STR IDVAR EQUAL strvar SCOLON .)
 
 
-state 104
+state 102
 
-    (63) nline -> STR LBB RBB IDVAR EQUAL . arrt SCOLON
-    (64) arrt -> . var
-    (65) arrt -> . LCB dws RCB
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (62) nline -> STR LBB RBB IDVAR EQUAL . arrt SCOLON
+    (63) arrt -> . var
+    (64) arrt -> . LCB dws RCB
+    (39) var -> . IDVAR
 
-    LCB             shift and go to state 116
+    LCB             shift and go to state 114
     IDVAR           shift and go to state 7
 
-    arrt                           shift and go to state 117
-    var                            shift and go to state 115
+    arrt                           shift and go to state 115
+    var                            shift and go to state 113
 
-state 105
+state 103
 
     (7) nline -> BOOL MAIN LPAREN RPAREN lcb . line rcb
     (1) line -> . nline line
@@ -1914,21 +1916,149 @@ state 105
     (11) nline -> . PRINT LPAREN pline RPAREN SCOLON
     (14) nline -> . FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
     (15) nline -> . WHILE LPAREN bexp RPAREN lcb line rcb
-    (62) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
-    (63) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
-    (41) dtype -> . INT
-    (42) dtype -> . FLT
-    (43) dtype -> . CHR
-    (44) dtype -> . BOOL
-    (60) fline -> . dtype numexp
-    (61) fline -> . numexp
+    (61) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
+    (62) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
+    (40) dtype -> . INT
+    (41) dtype -> . FLT
+    (42) dtype -> . CHR
+    (43) dtype -> . BOOL
+    (59) fline -> . dtype numexp
+    (60) fline -> . numexp
     (16) ifsts -> . IF LPAREN bexp RPAREN lcb line rcb elsests
     (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
+
+    STR             shift and go to state 5
+    BOOL            shift and go to state 8
+    RETURN          shift and go to state 9
+    EXIT            shift and go to state 11
+    PRINT           shift and go to state 12
+    FOR             shift and go to state 13
+    WHILE           shift and go to state 15
+    INT             shift and go to state 16
+    FLT             shift and go to state 17
+    CHR             shift and go to state 18
+    IF              shift and go to state 20
+    IDVAR           shift and go to state 7
+
+    line                           shift and go to state 116
+    nline                          shift and go to state 2
+    dtype                          shift and go to state 3
+    var                            shift and go to state 4
+    fline                          shift and go to state 6
+    ifsts                          shift and go to state 10
+    assign                         shift and go to state 14
+    numexp                         shift and go to state 19
+    varval                         shift and go to state 21
+
+state 104
+
+    (18) lcb -> LCB .
+
+    STR             reduce using rule 18 (lcb -> LCB .)
+    BOOL            reduce using rule 18 (lcb -> LCB .)
+    RETURN          reduce using rule 18 (lcb -> LCB .)
+    EXIT            reduce using rule 18 (lcb -> LCB .)
+    PRINT           reduce using rule 18 (lcb -> LCB .)
+    FOR             reduce using rule 18 (lcb -> LCB .)
+    WHILE           reduce using rule 18 (lcb -> LCB .)
+    INT             reduce using rule 18 (lcb -> LCB .)
+    FLT             reduce using rule 18 (lcb -> LCB .)
+    CHR             reduce using rule 18 (lcb -> LCB .)
+    IF              reduce using rule 18 (lcb -> LCB .)
+    IDVAR           reduce using rule 18 (lcb -> LCB .)
+
+
+state 105
+
+    (8) nline -> RETURN LPAREN bval RPAREN SCOLON .
+
+    STR             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    BOOL            reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    RETURN          reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    EXIT            reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    PRINT           reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    FOR             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    WHILE           reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    INT             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    FLT             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    CHR             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    IF              reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    IDVAR           reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    $end            reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+    RCB             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
+
+
+state 106
+
+    (11) nline -> PRINT LPAREN pline RPAREN SCOLON .
+
+    STR             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    BOOL            reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    RETURN          reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    EXIT            reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    PRINT           reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    FOR             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    WHILE           reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    INT             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    FLT             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    CHR             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    IF              reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    IDVAR           reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    $end            reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+    RCB             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
+
+
+state 107
+
+    (14) nline -> FOR LPAREN fline bexp SCOLON . assign RPAREN lcb line rcb
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
+
+    IDVAR           shift and go to state 7
+
+    assign                         shift and go to state 117
+    varval                         shift and go to state 21
+    var                            shift and go to state 4
+
+state 108
+
+    (15) nline -> WHILE LPAREN bexp RPAREN lcb . line rcb
+    (1) line -> . nline line
+    (2) line -> . nline
+    (3) nline -> . dtype var SCOLON
+    (4) nline -> . STR var SCOLON
+    (5) nline -> . fline
+    (6) nline -> . STR IDVAR EQUAL strvar SCOLON
+    (7) nline -> . BOOL MAIN LPAREN RPAREN lcb line rcb
+    (8) nline -> . RETURN LPAREN bval RPAREN SCOLON
+    (9) nline -> . ifsts
+    (10) nline -> . EXIT LPAREN RPAREN SCOLON
+    (11) nline -> . PRINT LPAREN pline RPAREN SCOLON
+    (14) nline -> . FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
+    (15) nline -> . WHILE LPAREN bexp RPAREN lcb line rcb
+    (61) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
+    (62) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
+    (40) dtype -> . INT
+    (41) dtype -> . FLT
+    (42) dtype -> . CHR
+    (43) dtype -> . BOOL
+    (59) fline -> . dtype numexp
+    (60) fline -> . numexp
+    (16) ifsts -> . IF LPAREN bexp RPAREN lcb line rcb elsests
+    (22) numexp -> . assign SCOLON
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
 
     STR             shift and go to state 5
     BOOL            shift and go to state 8
@@ -1951,172 +2081,47 @@ state 105
     ifsts                          shift and go to state 10
     assign                         shift and go to state 14
     numexp                         shift and go to state 19
-
-state 106
-
-    (18) lcb -> LCB .
-
-    STR             reduce using rule 18 (lcb -> LCB .)
-    BOOL            reduce using rule 18 (lcb -> LCB .)
-    RETURN          reduce using rule 18 (lcb -> LCB .)
-    EXIT            reduce using rule 18 (lcb -> LCB .)
-    PRINT           reduce using rule 18 (lcb -> LCB .)
-    FOR             reduce using rule 18 (lcb -> LCB .)
-    WHILE           reduce using rule 18 (lcb -> LCB .)
-    INT             reduce using rule 18 (lcb -> LCB .)
-    FLT             reduce using rule 18 (lcb -> LCB .)
-    CHR             reduce using rule 18 (lcb -> LCB .)
-    IF              reduce using rule 18 (lcb -> LCB .)
-    IDVAR           reduce using rule 18 (lcb -> LCB .)
-
-
-state 107
-
-    (8) nline -> RETURN LPAREN bval RPAREN SCOLON .
-
-    STR             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    BOOL            reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    RETURN          reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    EXIT            reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    PRINT           reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    FOR             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    WHILE           reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    INT             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    FLT             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    CHR             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    IF              reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    IDVAR           reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    $end            reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-    RCB             reduce using rule 8 (nline -> RETURN LPAREN bval RPAREN SCOLON .)
-
-
-state 108
-
-    (11) nline -> PRINT LPAREN pline RPAREN SCOLON .
-
-    STR             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    BOOL            reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    RETURN          reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    EXIT            reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    PRINT           reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    FOR             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    WHILE           reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    INT             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    FLT             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    CHR             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    IF              reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    IDVAR           reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    $end            reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-    RCB             reduce using rule 11 (nline -> PRINT LPAREN pline RPAREN SCOLON .)
-
+    varval                         shift and go to state 21
 
 state 109
 
-    (14) nline -> FOR LPAREN fline bexp SCOLON . assign RPAREN lcb line rcb
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (46) bexp -> bexp andor bexp2 .
+    (48) bexp2 -> bexp2 . rln exp
+    (50) rln -> . DEQUAL
+    (51) rln -> . GTHEN
+    (52) rln -> . LTHEN
+    (53) rln -> . NOT
 
-    IDVAR           shift and go to state 7
+    RPAREN          reduce using rule 46 (bexp -> bexp andor bexp2 .)
+    AND             reduce using rule 46 (bexp -> bexp andor bexp2 .)
+    OR              reduce using rule 46 (bexp -> bexp andor bexp2 .)
+    SCOLON          reduce using rule 46 (bexp -> bexp andor bexp2 .)
+    DEQUAL          shift and go to state 90
+    GTHEN           shift and go to state 91
+    LTHEN           shift and go to state 92
+    NOT             shift and go to state 93
 
-    assign                         shift and go to state 119
-    var                            shift and go to state 4
+    rln                            shift and go to state 89
 
 state 110
 
-    (15) nline -> WHILE LPAREN bexp RPAREN lcb . line rcb
-    (1) line -> . nline line
-    (2) line -> . nline
-    (3) nline -> . dtype var SCOLON
-    (4) nline -> . STR var SCOLON
-    (5) nline -> . fline
-    (6) nline -> . STR IDVAR EQUAL strvar SCOLON
-    (7) nline -> . BOOL MAIN LPAREN RPAREN lcb line rcb
-    (8) nline -> . RETURN LPAREN bval RPAREN SCOLON
-    (9) nline -> . ifsts
-    (10) nline -> . EXIT LPAREN RPAREN SCOLON
-    (11) nline -> . PRINT LPAREN pline RPAREN SCOLON
-    (14) nline -> . FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
-    (15) nline -> . WHILE LPAREN bexp RPAREN lcb line rcb
-    (62) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
-    (63) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
-    (41) dtype -> . INT
-    (42) dtype -> . FLT
-    (43) dtype -> . CHR
-    (44) dtype -> . BOOL
-    (60) fline -> . dtype numexp
-    (61) fline -> . numexp
-    (16) ifsts -> . IF LPAREN bexp RPAREN lcb line rcb elsests
-    (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
-
-    STR             shift and go to state 5
-    BOOL            shift and go to state 8
-    RETURN          shift and go to state 9
-    EXIT            shift and go to state 11
-    PRINT           shift and go to state 12
-    FOR             shift and go to state 13
-    WHILE           shift and go to state 15
-    INT             shift and go to state 16
-    FLT             shift and go to state 17
-    CHR             shift and go to state 18
-    IF              shift and go to state 20
-    IDVAR           shift and go to state 7
-
-    line                           shift and go to state 120
-    nline                          shift and go to state 2
-    dtype                          shift and go to state 3
-    var                            shift and go to state 4
-    fline                          shift and go to state 6
-    ifsts                          shift and go to state 10
-    assign                         shift and go to state 14
-    numexp                         shift and go to state 19
-
-state 111
-
-    (47) bexp -> bexp andor bexp2 .
-    (49) bexp2 -> bexp2 . rln exp
-    (51) rln -> . DEQUAL
-    (52) rln -> . GTHEN
-    (53) rln -> . LTHEN
-    (54) rln -> . NOT
-
-    RPAREN          reduce using rule 47 (bexp -> bexp andor bexp2 .)
-    AND             reduce using rule 47 (bexp -> bexp andor bexp2 .)
-    OR              reduce using rule 47 (bexp -> bexp andor bexp2 .)
-    SCOLON          reduce using rule 47 (bexp -> bexp andor bexp2 .)
-    DEQUAL          shift and go to state 92
-    GTHEN           shift and go to state 93
-    LTHEN           shift and go to state 94
-    NOT             shift and go to state 95
-
-    rln                            shift and go to state 91
-
-state 112
-
-    (49) bexp2 -> bexp2 rln exp .
+    (48) bexp2 -> bexp2 rln exp .
     (23) exp -> exp . PLUS term
     (24) exp -> exp . MINUS term
 
-    DEQUAL          reduce using rule 49 (bexp2 -> bexp2 rln exp .)
-    GTHEN           reduce using rule 49 (bexp2 -> bexp2 rln exp .)
-    LTHEN           reduce using rule 49 (bexp2 -> bexp2 rln exp .)
-    NOT             reduce using rule 49 (bexp2 -> bexp2 rln exp .)
-    RPAREN          reduce using rule 49 (bexp2 -> bexp2 rln exp .)
-    AND             reduce using rule 49 (bexp2 -> bexp2 rln exp .)
-    OR              reduce using rule 49 (bexp2 -> bexp2 rln exp .)
-    SCOLON          reduce using rule 49 (bexp2 -> bexp2 rln exp .)
+    DEQUAL          reduce using rule 48 (bexp2 -> bexp2 rln exp .)
+    GTHEN           reduce using rule 48 (bexp2 -> bexp2 rln exp .)
+    LTHEN           reduce using rule 48 (bexp2 -> bexp2 rln exp .)
+    NOT             reduce using rule 48 (bexp2 -> bexp2 rln exp .)
+    RPAREN          reduce using rule 48 (bexp2 -> bexp2 rln exp .)
+    AND             reduce using rule 48 (bexp2 -> bexp2 rln exp .)
+    OR              reduce using rule 48 (bexp2 -> bexp2 rln exp .)
+    SCOLON          reduce using rule 48 (bexp2 -> bexp2 rln exp .)
     PLUS            shift and go to state 71
     MINUS           shift and go to state 72
 
 
-state 113
+state 111
 
     (16) ifsts -> IF LPAREN bexp RPAREN lcb . line rcb elsests
     (1) line -> . nline line
@@ -2132,21 +2137,21 @@ state 113
     (11) nline -> . PRINT LPAREN pline RPAREN SCOLON
     (14) nline -> . FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
     (15) nline -> . WHILE LPAREN bexp RPAREN lcb line rcb
-    (62) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
-    (63) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
-    (41) dtype -> . INT
-    (42) dtype -> . FLT
-    (43) dtype -> . CHR
-    (44) dtype -> . BOOL
-    (60) fline -> . dtype numexp
-    (61) fline -> . numexp
+    (61) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
+    (62) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
+    (40) dtype -> . INT
+    (41) dtype -> . FLT
+    (42) dtype -> . CHR
+    (43) dtype -> . BOOL
+    (59) fline -> . dtype numexp
+    (60) fline -> . numexp
     (16) ifsts -> . IF LPAREN bexp RPAREN lcb line rcb elsests
     (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
 
     STR             shift and go to state 5
     BOOL            shift and go to state 8
@@ -2161,7 +2166,7 @@ state 113
     IF              shift and go to state 20
     IDVAR           shift and go to state 7
 
-    line                           shift and go to state 121
+    line                           shift and go to state 119
     nline                          shift and go to state 2
     dtype                          shift and go to state 3
     var                            shift and go to state 4
@@ -2169,169 +2174,169 @@ state 113
     ifsts                          shift and go to state 10
     assign                         shift and go to state 14
     numexp                         shift and go to state 19
+    varval                         shift and go to state 21
+
+state 112
+
+    (61) nline -> dtype LBB RBB IDVAR EQUAL arrt . SCOLON
+
+    SCOLON          shift and go to state 120
+
+
+state 113
+
+    (63) arrt -> var .
+
+    SCOLON          reduce using rule 63 (arrt -> var .)
+
 
 state 114
 
-    (62) nline -> dtype LBB RBB IDVAR EQUAL arrt . SCOLON
-
-    SCOLON          shift and go to state 122
-
-
-state 115
-
-    (64) arrt -> var .
-
-    SCOLON          reduce using rule 64 (arrt -> var .)
-
-
-state 116
-
-    (65) arrt -> LCB . dws RCB
-    (66) dws -> . factarr COM dws
-    (67) dws -> . factarr
-    (68) factarr -> . fact
-    (69) factarr -> . STRING
+    (64) arrt -> LCB . dws RCB
+    (65) dws -> . factarr COM dws
+    (66) dws -> . factarr
+    (67) factarr -> . fact
+    (68) factarr -> . STRING
     (30) fact -> . INTEGER
     (31) fact -> . FLOAT
     (32) fact -> . varval
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    STRING          shift and go to state 126
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    STRING          shift and go to state 124
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    dws                            shift and go to state 123
-    factarr                        shift and go to state 124
-    fact                           shift and go to state 125
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    dws                            shift and go to state 121
+    factarr                        shift and go to state 122
+    fact                           shift and go to state 123
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
-state 117
+state 115
 
-    (63) nline -> STR LBB RBB IDVAR EQUAL arrt . SCOLON
+    (62) nline -> STR LBB RBB IDVAR EQUAL arrt . SCOLON
 
-    SCOLON          shift and go to state 127
+    SCOLON          shift and go to state 125
 
 
-state 118
+state 116
 
     (7) nline -> BOOL MAIN LPAREN RPAREN lcb line . rcb
     (17) rcb -> . RCB
 
-    RCB             shift and go to state 129
+    RCB             shift and go to state 127
 
-    rcb                            shift and go to state 128
+    rcb                            shift and go to state 126
 
-state 119
+state 117
 
     (14) nline -> FOR LPAREN fline bexp SCOLON assign . RPAREN lcb line rcb
 
-    RPAREN          shift and go to state 130
+    RPAREN          shift and go to state 128
 
 
-state 120
+state 118
 
     (15) nline -> WHILE LPAREN bexp RPAREN lcb line . rcb
     (17) rcb -> . RCB
 
-    RCB             shift and go to state 129
+    RCB             shift and go to state 127
 
-    rcb                            shift and go to state 131
+    rcb                            shift and go to state 129
 
-state 121
+state 119
 
     (16) ifsts -> IF LPAREN bexp RPAREN lcb line . rcb elsests
     (17) rcb -> . RCB
 
-    RCB             shift and go to state 129
+    RCB             shift and go to state 127
 
-    rcb                            shift and go to state 132
+    rcb                            shift and go to state 130
+
+state 120
+
+    (61) nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .
+
+    STR             reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    BOOL            reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    RETURN          reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    EXIT            reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    PRINT           reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    FOR             reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    WHILE           reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    INT             reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    FLT             reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    CHR             reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    IF              reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    IDVAR           reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    $end            reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    RCB             reduce using rule 61 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+
+
+state 121
+
+    (64) arrt -> LCB dws . RCB
+
+    RCB             shift and go to state 131
+
 
 state 122
 
-    (62) nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .
+    (65) dws -> factarr . COM dws
+    (66) dws -> factarr .
 
-    STR             reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    BOOL            reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    RETURN          reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    EXIT            reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    PRINT           reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    FOR             reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    WHILE           reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    INT             reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    FLT             reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    CHR             reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    IF              reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    IDVAR           reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    $end            reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
-    RCB             reduce using rule 62 (nline -> dtype LBB RBB IDVAR EQUAL arrt SCOLON .)
+    COM             shift and go to state 132
+    RCB             reduce using rule 66 (dws -> factarr .)
 
 
 state 123
 
-    (65) arrt -> LCB dws . RCB
+    (67) factarr -> fact .
 
-    RCB             shift and go to state 133
+    COM             reduce using rule 67 (factarr -> fact .)
+    RCB             reduce using rule 67 (factarr -> fact .)
 
 
 state 124
 
-    (66) dws -> factarr . COM dws
-    (67) dws -> factarr .
+    (68) factarr -> STRING .
 
-    COM             shift and go to state 134
-    RCB             reduce using rule 67 (dws -> factarr .)
+    COM             reduce using rule 68 (factarr -> STRING .)
+    RCB             reduce using rule 68 (factarr -> STRING .)
 
 
 state 125
 
-    (68) factarr -> fact .
+    (62) nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .
 
-    COM             reduce using rule 68 (factarr -> fact .)
-    RCB             reduce using rule 68 (factarr -> fact .)
+    STR             reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    BOOL            reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    RETURN          reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    EXIT            reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    PRINT           reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    FOR             reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    WHILE           reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    INT             reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    FLT             reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    CHR             reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    IF              reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    IDVAR           reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    $end            reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
+    RCB             reduce using rule 62 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
 
 
 state 126
-
-    (69) factarr -> STRING .
-
-    COM             reduce using rule 69 (factarr -> STRING .)
-    RCB             reduce using rule 69 (factarr -> STRING .)
-
-
-state 127
-
-    (63) nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .
-
-    STR             reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    BOOL            reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    RETURN          reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    EXIT            reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    PRINT           reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    FOR             reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    WHILE           reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    INT             reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    FLT             reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    CHR             reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    IF              reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    IDVAR           reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    $end            reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-    RCB             reduce using rule 63 (nline -> STR LBB RBB IDVAR EQUAL arrt SCOLON .)
-
-
-state 128
 
     (7) nline -> BOOL MAIN LPAREN RPAREN lcb line rcb .
 
@@ -2351,7 +2356,7 @@ state 128
     RCB             reduce using rule 7 (nline -> BOOL MAIN LPAREN RPAREN lcb line rcb .)
 
 
-state 129
+state 127
 
     (17) rcb -> RCB .
 
@@ -2372,16 +2377,16 @@ state 129
     ELSE            reduce using rule 17 (rcb -> RCB .)
 
 
-state 130
+state 128
 
     (14) nline -> FOR LPAREN fline bexp SCOLON assign RPAREN . lcb line rcb
     (18) lcb -> . LCB
 
-    LCB             shift and go to state 106
+    LCB             shift and go to state 104
 
-    lcb                            shift and go to state 135
+    lcb                            shift and go to state 133
 
-state 131
+state 129
 
     (15) nline -> WHILE LPAREN bexp RPAREN lcb line rcb .
 
@@ -2401,75 +2406,74 @@ state 131
     RCB             reduce using rule 15 (nline -> WHILE LPAREN bexp RPAREN lcb line rcb .)
 
 
-state 132
+state 130
 
     (16) ifsts -> IF LPAREN bexp RPAREN lcb line rcb . elsests
     (19) elsests -> . ELSE lcb line rcb
     (20) elsests -> . ELSE ifsts
     (21) elsests -> . empty
-    (57) empty -> .
+    (56) empty -> .
 
-    ELSE            shift and go to state 137
-    STR             reduce using rule 57 (empty -> .)
-    BOOL            reduce using rule 57 (empty -> .)
-    RETURN          reduce using rule 57 (empty -> .)
-    EXIT            reduce using rule 57 (empty -> .)
-    PRINT           reduce using rule 57 (empty -> .)
-    FOR             reduce using rule 57 (empty -> .)
-    WHILE           reduce using rule 57 (empty -> .)
-    INT             reduce using rule 57 (empty -> .)
-    FLT             reduce using rule 57 (empty -> .)
-    CHR             reduce using rule 57 (empty -> .)
-    IF              reduce using rule 57 (empty -> .)
-    IDVAR           reduce using rule 57 (empty -> .)
-    $end            reduce using rule 57 (empty -> .)
-    RCB             reduce using rule 57 (empty -> .)
+    ELSE            shift and go to state 135
+    STR             reduce using rule 56 (empty -> .)
+    BOOL            reduce using rule 56 (empty -> .)
+    RETURN          reduce using rule 56 (empty -> .)
+    EXIT            reduce using rule 56 (empty -> .)
+    PRINT           reduce using rule 56 (empty -> .)
+    FOR             reduce using rule 56 (empty -> .)
+    WHILE           reduce using rule 56 (empty -> .)
+    INT             reduce using rule 56 (empty -> .)
+    FLT             reduce using rule 56 (empty -> .)
+    CHR             reduce using rule 56 (empty -> .)
+    IF              reduce using rule 56 (empty -> .)
+    IDVAR           reduce using rule 56 (empty -> .)
+    $end            reduce using rule 56 (empty -> .)
+    RCB             reduce using rule 56 (empty -> .)
 
-    elsests                        shift and go to state 136
-    empty                          shift and go to state 138
+    elsests                        shift and go to state 134
+    empty                          shift and go to state 136
 
-state 133
+state 131
 
-    (65) arrt -> LCB dws RCB .
+    (64) arrt -> LCB dws RCB .
 
-    SCOLON          reduce using rule 65 (arrt -> LCB dws RCB .)
+    SCOLON          reduce using rule 64 (arrt -> LCB dws RCB .)
 
 
-state 134
+state 132
 
-    (66) dws -> factarr COM . dws
-    (66) dws -> . factarr COM dws
-    (67) dws -> . factarr
-    (68) factarr -> . fact
-    (69) factarr -> . STRING
+    (65) dws -> factarr COM . dws
+    (65) dws -> . factarr COM dws
+    (66) dws -> . factarr
+    (67) factarr -> . fact
+    (68) factarr -> . STRING
     (30) fact -> . INTEGER
     (31) fact -> . FLOAT
     (32) fact -> . varval
     (33) fact -> . bval
     (34) fact -> . CHAR
     (35) varval -> . var
-    (36) bval -> . TRUE
-    (37) bval -> . FALSE
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (36) varval -> . var LBB exp RBB
+    (37) bval -> . TRUE
+    (38) bval -> . FALSE
+    (39) var -> . IDVAR
 
-    STRING          shift and go to state 126
-    INTEGER         shift and go to state 45
-    FLOAT           shift and go to state 46
-    CHAR            shift and go to state 49
-    TRUE            shift and go to state 50
-    FALSE           shift and go to state 51
+    STRING          shift and go to state 124
+    INTEGER         shift and go to state 44
+    FLOAT           shift and go to state 45
+    CHAR            shift and go to state 48
+    TRUE            shift and go to state 49
+    FALSE           shift and go to state 50
     IDVAR           shift and go to state 7
 
-    factarr                        shift and go to state 124
-    dws                            shift and go to state 139
-    fact                           shift and go to state 125
-    varval                         shift and go to state 47
-    bval                           shift and go to state 48
-    var                            shift and go to state 40
+    factarr                        shift and go to state 122
+    dws                            shift and go to state 137
+    fact                           shift and go to state 123
+    varval                         shift and go to state 46
+    bval                           shift and go to state 47
+    var                            shift and go to state 4
 
-state 135
+state 133
 
     (14) nline -> FOR LPAREN fline bexp SCOLON assign RPAREN lcb . line rcb
     (1) line -> . nline line
@@ -2485,21 +2489,21 @@ state 135
     (11) nline -> . PRINT LPAREN pline RPAREN SCOLON
     (14) nline -> . FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
     (15) nline -> . WHILE LPAREN bexp RPAREN lcb line rcb
-    (62) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
-    (63) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
-    (41) dtype -> . INT
-    (42) dtype -> . FLT
-    (43) dtype -> . CHR
-    (44) dtype -> . BOOL
-    (60) fline -> . dtype numexp
-    (61) fline -> . numexp
+    (61) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
+    (62) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
+    (40) dtype -> . INT
+    (41) dtype -> . FLT
+    (42) dtype -> . CHR
+    (43) dtype -> . BOOL
+    (59) fline -> . dtype numexp
+    (60) fline -> . numexp
     (16) ifsts -> . IF LPAREN bexp RPAREN lcb line rcb elsests
     (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
 
     STR             shift and go to state 5
     BOOL            shift and go to state 8
@@ -2516,14 +2520,15 @@ state 135
 
     fline                          shift and go to state 6
     assign                         shift and go to state 14
-    line                           shift and go to state 140
+    line                           shift and go to state 138
     nline                          shift and go to state 2
     dtype                          shift and go to state 3
     var                            shift and go to state 4
     ifsts                          shift and go to state 10
     numexp                         shift and go to state 19
+    varval                         shift and go to state 21
 
-state 136
+state 134
 
     (16) ifsts -> IF LPAREN bexp RPAREN lcb line rcb elsests .
 
@@ -2543,20 +2548,20 @@ state 136
     RCB             reduce using rule 16 (ifsts -> IF LPAREN bexp RPAREN lcb line rcb elsests .)
 
 
-state 137
+state 135
 
     (19) elsests -> ELSE . lcb line rcb
     (20) elsests -> ELSE . ifsts
     (18) lcb -> . LCB
     (16) ifsts -> . IF LPAREN bexp RPAREN lcb line rcb elsests
 
-    LCB             shift and go to state 106
+    LCB             shift and go to state 104
     IF              shift and go to state 20
 
-    lcb                            shift and go to state 141
-    ifsts                          shift and go to state 142
+    lcb                            shift and go to state 139
+    ifsts                          shift and go to state 140
 
-state 138
+state 136
 
     (21) elsests -> empty .
 
@@ -2576,23 +2581,23 @@ state 138
     RCB             reduce using rule 21 (elsests -> empty .)
 
 
-state 139
+state 137
 
-    (66) dws -> factarr COM dws .
+    (65) dws -> factarr COM dws .
 
-    RCB             reduce using rule 66 (dws -> factarr COM dws .)
+    RCB             reduce using rule 65 (dws -> factarr COM dws .)
 
 
-state 140
+state 138
 
     (14) nline -> FOR LPAREN fline bexp SCOLON assign RPAREN lcb line . rcb
     (17) rcb -> . RCB
 
-    RCB             shift and go to state 129
+    RCB             shift and go to state 127
 
-    rcb                            shift and go to state 143
+    rcb                            shift and go to state 141
 
-state 141
+state 139
 
     (19) elsests -> ELSE lcb . line rcb
     (1) line -> . nline line
@@ -2608,21 +2613,21 @@ state 141
     (11) nline -> . PRINT LPAREN pline RPAREN SCOLON
     (14) nline -> . FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
     (15) nline -> . WHILE LPAREN bexp RPAREN lcb line rcb
-    (62) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
-    (63) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
-    (41) dtype -> . INT
-    (42) dtype -> . FLT
-    (43) dtype -> . CHR
-    (44) dtype -> . BOOL
-    (60) fline -> . dtype numexp
-    (61) fline -> . numexp
+    (61) nline -> . dtype LBB RBB IDVAR EQUAL arrt SCOLON
+    (62) nline -> . STR LBB RBB IDVAR EQUAL arrt SCOLON
+    (40) dtype -> . INT
+    (41) dtype -> . FLT
+    (42) dtype -> . CHR
+    (43) dtype -> . BOOL
+    (59) fline -> . dtype numexp
+    (60) fline -> . numexp
     (16) ifsts -> . IF LPAREN bexp RPAREN lcb line rcb elsests
     (22) numexp -> . assign SCOLON
-    (58) assign -> . var EQUAL exp
-    (59) assign -> . var EQUAL STRING
-    (38) var -> . IDVAR
-    (39) var -> . IDVAR LBB INTEGER RBB
-    (40) var -> . IDVAR LBB IDVAR RBB
+    (57) assign -> . varval EQUAL exp
+    (58) assign -> . varval EQUAL STRING
+    (35) varval -> . var
+    (36) varval -> . var LBB exp RBB
+    (39) var -> . IDVAR
 
     STR             shift and go to state 5
     BOOL            shift and go to state 8
@@ -2637,7 +2642,7 @@ state 141
     IF              shift and go to state 20
     IDVAR           shift and go to state 7
 
-    line                           shift and go to state 144
+    line                           shift and go to state 142
     nline                          shift and go to state 2
     dtype                          shift and go to state 3
     var                            shift and go to state 4
@@ -2645,8 +2650,9 @@ state 141
     ifsts                          shift and go to state 10
     assign                         shift and go to state 14
     numexp                         shift and go to state 19
+    varval                         shift and go to state 21
 
-state 142
+state 140
 
     (20) elsests -> ELSE ifsts .
 
@@ -2666,7 +2672,7 @@ state 142
     RCB             reduce using rule 20 (elsests -> ELSE ifsts .)
 
 
-state 143
+state 141
 
     (14) nline -> FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb .
 
@@ -2686,16 +2692,16 @@ state 143
     RCB             reduce using rule 14 (nline -> FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb .)
 
 
-state 144
+state 142
 
     (19) elsests -> ELSE lcb line . rcb
     (17) rcb -> . RCB
 
-    RCB             shift and go to state 129
+    RCB             shift and go to state 127
 
-    rcb                            shift and go to state 145
+    rcb                            shift and go to state 143
 
-state 145
+state 143
 
     (19) elsests -> ELSE lcb line rcb .
 

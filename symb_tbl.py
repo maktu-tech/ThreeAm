@@ -3,29 +3,20 @@ stk = [{}]
 def add_scope():
     stk.append({})
 
-
 def remove_scope():
     stk.pop()
 
-def store(name,tpe,value=None,lineNo=0):
+def store(name,tpe,value=None,lineNo=0, arraytype = None):
 
     for st in stk:
         if(name in st):
             print('ERROR(line no.: {}): Already Declared'.format(lineNo))
             exit()
-    st[name] = {'type': tpe, 'value': value, 'line': lineNo}
-
-    # if name not in stk[len(stk)-1]:
-    #     stk[len(stk)-1][name] = {'value': value, 'type': tpe, 'line': lineNo}
-    # else:
-    #     print('ERROR(line no.: {}): Already Declared'.format(lineNo))
-    #     exit()
-
-
-
+    stk[-1][name] = {'type': tpe, 'value': value, 'line': lineNo}
+    if(arraytype):
+        stk[-1][name]['arraytype'] = arraytype 
 
 def lookup(name):
-
     for st in stk[::-1]:
         if(name in st):
             return st[name]        

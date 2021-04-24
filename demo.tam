@@ -1,17 +1,31 @@
 int a = 45;
 int b = 50;
 int c;
-
-
-while(a < 95){
-    int f = 0;
-    if(f > b){
-        int d = 45;
-        int e = 50;
-        f = a+e;
+string s1="123";
+for(s1="234"; a<12; s1="2"){
+    while(a < 95){
+        int f = 0;
+        if(f > b){
+            int d = 45;
+            int e = 50;
+            f = a+e;
+        }else if(a == 2){
+            int d = 50;
+            int e = 50;
+            e = f+d;
+        }
+        else{
+            int d = 50;
+            int e = 50;
+            e = f+d;
+        }
+        f = f- 50;
+        b = f;
     }
-    f = f- 50;
-    b = f;
-}
-
+    }
 c = a+b;
+string s2 = s1;
+print("1243");
+int[] var = {12,15,15};
+var[2] = 45;
+c = 45 + var[3];
