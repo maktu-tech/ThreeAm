@@ -33,9 +33,8 @@
 
     nline : FOR LPAREN fline bexp SCOLON assign RPAREN LCB line RCB
     nline : WHILE LPAREN bexp RPAREN LCB line RCB
-    assign : var EQUAL exp
-
-    
+    assign : var EQUAL exp | var EQUAL STRING
+ 
 
     nline : dtype LBB RBB IDVAR EQUAL arrt SCOLON | STR LBB RBB IDVAR EQUAL arrt SCOLON 
     arrt : var | LCB dws RCB
@@ -63,7 +62,7 @@ def p_nline_dec(p):
 
 def p_nline_str(p):
     'nline : STR IDVAR EQUAL strvar SCOLON'
-    vars[p[2]] = p[4]
+    store(p[2],p[1],p[4]['value'],p[4]['line'])
     
 def p_nline_main(p):
     'nline : BOOL MAIN LPAREN RPAREN LCB line RCB'
@@ -181,35 +180,51 @@ def p_dtype_num(p):
 
 def p_strvar_val(p):
     '''strvar : STRING 
-            | var'''
-    
+            | varval'''
+    if(p[1]['type'] == 'string'):
+        p[0] = p[1]
+    else:
+        print("TYPE ERROR {} is not same as string".format(p[1]['type']))
+        exit()
+
 def p_bexp_fst(p):
     '''bexp : bexp andor bexp2 
             | bexp2'''
+    if(len(p) == 4):
+        pass
+    else:
+        p[0] = p[1]
 
 def p_bexp2_fst(p):
     '''bexp2 : bexp2 rln exp 
             | exp'''
+    if(len(p)==4):
+        pass
+    else:
+        p[0] = p[1]
 
 def p_rln_fst(p):
     '''rln : DEQUAL 
             | GTHEN 
             | LTHEN 
             | NOT'''
+    p[0] = p[1]
 
 def p_andor_fst(p):
     '''andor : AND 
             | OR'''
+    p[0] = p[1]
 
 def p_empty(p):
     'empty :'
     pass
 
 def p_assign_num(p):
-    'assign : var EQUAL exp'
+    '''assign : var EQUAL exp
+              | var EQUAL STRING'''
     if(not p[3]):
         exit()
-    tval = p[3]
+    tval = p[3].copy()
     tval['name'] = p[1]
     p[0] = tval
 
@@ -254,78 +269,8 @@ def p_error(p):
 # Build the parser
 parser = yacc.yacc()
 
-# while True:
-#    try:
-#        s = input('calc > ')
-#    except EOFError:
-#        break
-#    if not s: continue
-#    result = parser.parse(s)
-#    print(result)
-
-
 f = open('demo.tam')
 data = f.read()
 
-'''
-int[] arr = {1,"df",23, true, 12.32, 'w',asdf};
-int as[2];
-int[] asdf = {12};
-string[] a1 = {1,2,3};
-
-boolean main(){
-if(a[0]==a[1]){
-for(int a=1; b>2; b=b+1){
-    a[4]=1;
-}
-}}
-'''
-
-
-
-
-'''
-boolean main(){
-if(a==a){
-for(int a=1; b>2; b=b+1){
-    a=1;
-}
-while(a>d<as<asdf>1<2 and a!1==df<2.34>'1' or true or false){
-    a=1;
-}
- }else{
-    if(b < a and c == b){
-        string ayush = "ayush";
-    }else if(b ! c){
-        b = c;
-        }
-}
-string z;
-print(a+b*4-6/23%2);
-# return();
-return(true);
-exit();
-}
-
-'''
-
-# 
-# 
-# '''
-''' 
-int jav = 45;
-int kav = 50;
-int res = 45+50;
-res = res+jav;
-res = res+kav;
-float f1 = 45.2;
-string trrs;
-boolean b1 = true;
-string s1 = "Ayush Agarwal";
-string s2 = s1;
-# int a = "ajsb";
-char ch = '5';
-string res;
-'''
 result = parser.parse(data)
 print(result)

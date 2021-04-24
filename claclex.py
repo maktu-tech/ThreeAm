@@ -195,7 +195,7 @@ def t_COMMENT(t):
  # C string
 def t_STRING(t):
     r'\"([^\\\n]|(\\.))*?\"'
-    t.value = t.value.strip('\"')
+    t.value = {'type':'string', 'value':t.value.strip('\"'), 'line': t.lexer.lineno}
     return t
 
 
