@@ -1,4 +1,5 @@
 '''
+
     line -> nline line | nline
     nline -> dtype var SCOLON | STR var SCOLON
     nline ->  fline
@@ -14,15 +15,18 @@
     nline -> STR IDVAR EQUAL strvar SCOLON
     strvar -> STRING | var
 
-    nline : BOOL MAIN LPAREN RPAREN LCB line RCB 
+    nline : BOOL MAIN LPAREN RPAREN lcb line rcb 
     nline : RETURN LPAREN bval RPAREN SCOLON
     nline : EXIT LPAREN RPAREN SCOLON
     nline : PRINT LPAREN pline RPAREN SCOLON
     pline : exp | STRING
 
     nline : ifsts
-    ifsts : IF LPAREN bexp RPAREN LCB line RCB elsests
-    elsests : ELSE LCB line RCB | ELSE ifsts | empty
+    ifsts : IF LPAREN bexp RPAREN lcb line rcb elsests
+    elsests : ELSE lcb line rcb | ELSE ifsts | empty
+
+    lcb : LCB
+    rcb : RCB
 
     bexp : bexp andor bexp2 | bexp2
     bexp2 : bexp2 rln exp | exp
@@ -31,8 +35,8 @@
     
     empty :
 
-    nline : FOR LPAREN fline bexp SCOLON assign RPAREN LCB line RCB
-    nline : WHILE LPAREN bexp RPAREN LCB line RCB
+    nline : FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
+    nline : WHILE LPAREN bexp RPAREN lcb line rcb
     assign : var EQUAL exp | var EQUAL STRING
  
 
@@ -58,14 +62,18 @@ def p_nline_init(p):
 def p_nline_dec(p):
     'nline : fline'
     p[0] = p[1]
-    print(st)
+
+    print()
+    for st in stk:
+        print(st)
+    print()
 
 def p_nline_str(p):
     'nline : STR IDVAR EQUAL strvar SCOLON'
     store(p[2],p[1],p[4]['value'],p[4]['line'])
     
 def p_nline_main(p):
-    'nline : BOOL MAIN LPAREN RPAREN LCB line RCB'
+    'nline : BOOL MAIN LPAREN RPAREN lcb line rcb'
 
 def p_nline_ret(p):
     'nline : RETURN LPAREN bval RPAREN SCOLON'
@@ -85,16 +93,24 @@ def p_pline_print(p):
     print(p[1])
 
 def p_nline_for(p):
-    'nline : FOR LPAREN fline bexp SCOLON assign RPAREN LCB line RCB'
+    'nline : FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb'
 
 def p_nline_while(p):
-    'nline : WHILE LPAREN bexp RPAREN LCB line RCB'
+    'nline : WHILE LPAREN bexp RPAREN lcb line rcb'
 
 def p_ifsts_fst(p):
-    'ifsts : IF LPAREN bexp RPAREN LCB line RCB elsests'
+    'ifsts : IF LPAREN bexp RPAREN lcb line rcb elsests'
+    
+def p_rcb_scppop(p):
+    'rcb : RCB'
+    remove_scope()
+
+def p_lcb_scppush(p):
+    'lcb : LCB'
+    add_scope()
 
 def p_elsests_fst(p):
-    '''elsests : ELSE LCB line RCB 
+    '''elsests : ELSE lcb line rcb 
                 | ELSE ifsts 
                 | empty'''
 
@@ -115,6 +131,7 @@ def p_exp_pm(p):
         p0 = None
         if(p[2] == '+'):
             p0 = p1 + p3
+            pass
         else:
             p0 = p1 - p3
 
@@ -242,7 +259,8 @@ def p_fline_for(p):
         if( p[1]['type'] != tval['type']):
             print("ERROR: Missmached type: {} not matched with {} datatype".format(p[1]['name'],p[1]['type']))
             exit()
-        st[p[1]['name']]['value'] = p[1]['value']
+        # st[p[1]['name']]['value'] = p[1]['value']
+        update_spe(p[1]['name'],['value'],[p[1]['value']])
 
 def p_nline_arr(p):
     '''nline : dtype LBB RBB IDVAR EQUAL arrt SCOLON
@@ -274,3 +292,33 @@ data = f.read()
 
 result = parser.parse(data)
 print(result)
+
+
+
+
+'''
+print(45 + 56 * 3 /50 +23 %5+ 21 + 51);
+float a;
+int b = 45;
+int c = 45 + 56 * 3 /50 +23 %5+ 21 + 51;
+string abc;
+float d = 45.1 + 56.0;
+a = d;
+string abcd = "ayush";
+abc = "agarwal";
+b = c;
+int jav = 45;
+int kav = 50;
+int res = 45+50;
+res = res+jav;
+res = res+kav;
+float f1 = 45.2;
+string trrs;
+boolean b1 = true;
+string s1 = "Ayush Agarwal";
+string s2 = s1;
+string a1 = "ajsb";
+char ch = '5';
+#string res;
+
+'''
