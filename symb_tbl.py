@@ -32,3 +32,9 @@ def update_spe(name,fields,values):
             return
     print(name+ " not declared")
     exit()
+
+def lookup_init(name):
+    for st in stk[::-1]:
+        if(name in st):
+            return st[name]        
+    return None

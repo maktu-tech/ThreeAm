@@ -1,5 +1,5 @@
 '''
-
+ 
     line -> nline line | nline
     nline -> dtype var SCOLON | STR var SCOLON
     nline ->  fline
@@ -11,10 +11,9 @@
     bval -> TRUE | FALSE
     varval -> var | var LBB exp RBB
     var : IDVAR
-    //var -> IDVAR | IDVAR LBB INTEGER RBB | IDVAR LBB IDVAR RBB
     dtype -> INT | FLT | CHR | BOOL
     nline -> STR IDVAR EQUAL strvar SCOLON
-    strvar -> STRING | var
+    strvar -> STRING | varval
 
     nline : BOOL MAIN LPAREN RPAREN lcb line rcb 
     nline : RETURN LPAREN bval RPAREN SCOLON
@@ -38,7 +37,7 @@
 
     nline : FOR LPAREN fline bexp SCOLON assign RPAREN lcb line rcb
     nline : WHILE LPAREN bexp RPAREN lcb line rcb
-    assign : var EQUAL exp | var EQUAL STRING
+    assign : assvar EQUAL exp | assvar EQUAL STRING
  
 
     nline : dtype LBB RBB IDVAR EQUAL arrt SCOLON | STR LBB RBB IDVAR EQUAL arrt SCOLON 
@@ -124,17 +123,18 @@ def p_exp_pm(p):
            | exp MINUS term 
            | term'''
     if(len(p)==4):
+        print(p[1],p[3])
         if(not p[1]['type'] == p[3]['type']):
-            print('ERROR: Type mismched in line:',p[1]['line'])
+            print('ERROR: Type mismatched in line:',p[1]['line'])
             exit()
         p1 = p[1]['value']
         p3 = p[3]['value']
         p0 = None
-        if(p[2] == '+'):
-            p0 = p1 + p3
-            pass
-        else:
-            p0 = p1 - p3
+        # if(p[2] == '+'):
+        #     p0 = p1 + p3
+        #     pass
+        # else:
+        #     p0 = p1 - p3
 
         p[0] = {'value':p0, 'type': p[1]['type'], 'line':p[1]['line']}
     else:
@@ -148,7 +148,7 @@ def p_term_mdm(p):
 
     if(len(p)==4):
         if(not p[1]['type'] == p[3]['type']):
-            print('ERROR: Type mismched in line:',p[1]['line'])
+            print('ERROR: Type mismatched in line:',p[1]['line'])
             exit()
         p1 = p[1]['value']
         p3 = p[3]['value']
@@ -179,15 +179,37 @@ def p_varval_val(p):
               | var LBB exp RBB'''
     
     p0 = lookup(p[1])
-    if(len(p) == 4):
-        if(p[0]['type'] != 'array'):
+    if(len(p) == 5):
+        if(p0['type'] != 'array'):
             print('TYPE ERROR! {} is not an array'.format(p[1]))
             exit()
         if(p[3]['type'] != 'int'):
             print('TYPE ERROR! array index cannot be of {} type'.format(p[3]['type']))
+            exit()
         #TODO: cal val of array using index and address
-        p[0] = {'type': p[1]['arraytype'],'line':p[1]['line'], 'value':p[1]['value']}
+        p[0] = {'type': p0['arraytype'],'line':p0['line'], 'value':p0['value']}
     else:
+        p[0] = p0
+
+def p_assvar_val(p):
+    '''assvar : var
+              | var LBB exp RBB'''
+    
+    p0 = lookup_init(p[1])
+    if(not p0):# a
+        p[0] = p[1]
+        return
+    if(len(p) == 5):#a[12]
+        if(p0['type'] != 'array'):
+            print('TYPE ERROR! {} is not an array'.format(p[1]))
+            exit()
+        if(p[3]['type'] != 'int'):
+            print('TYPE ERROR! array index cannot be of {} type'.format(p[3]['type']))
+            exit()
+        #TODO: cal val of array using index and address
+        p[0] = {'type': p0['type'],'line':p0['line'], 'arraytype': p0['arraytype'] ,'value':p0['value'], 'name': p[1]}
+    else:
+        p0['name'] = p[1]
         p[0] = p0
 
 def p_bval_val(p):
@@ -249,17 +271,25 @@ def p_empty(p):
     pass
 
 def p_assign_num(p):
-    '''assign : var EQUAL exp
-              | var EQUAL STRING'''
+    '''assign : assvar EQUAL exp
+              | assvar EQUAL STRING'''
     if(not p[3]):
         print('ERROR! variable used before assigned!!')
         exit()
     tval = p[3].copy()
-    tval['name'] = p[1]
-    # tval['name'] = p[1]['name']
-    # if(tval['type'] != p[1]['type']):
-    #     print("TYPE ERROR! {} doesn't match with {} in lineno: {}".format(tval['type'],p[1]['type'],tval['lineno']))
-    p[0] = tval
+    if(type(p[1]) == str):
+        tval['name'] = p[1]
+        p[0] = tval
+    else:
+        ttype = p[1]['type']
+        if(ttype == 'array'):
+            ttype = p[1]['arraytype']
+        if(tval['type'] != ttype):
+            print("TYPE ERROR! {} doesn't match with {} in lineno: {}".format(tval['type'],p[1]['type'],tval['line']))
+            exit()
+        p[1]['value'] = tval['value']
+        p[1]['line'] = tval['line']
+        p[0] = p[1]
 
 def p_fline_for(p):
     '''fline : dtype numexp 
@@ -281,12 +311,18 @@ def p_fline_for(p):
 def p_nline_arr(p):
     '''nline : dtype LBB RBB IDVAR EQUAL arrt SCOLON
                 | STR LBB RBB IDVAR EQUAL arrt SCOLON'''
-    if(p[1] != p[6]['type']):
-        print("TYPE ERROR!")
-        exit()
-    
-    store(p[4],'array', arraytype= p[1])
 
+    #TODO: ADD a way to give size in array at initialization
+    if(p[6]['type']== 'array'):
+        if(p[1] != p[6]['arraytype']):
+            print("Array Type error in {}!".format(p[4]))
+            exit()
+    else:
+        if(p[1] != p[6]['type']):
+            print("Type error in {}!".format(p[4]))
+            exit()
+    store(p[4],'array', arraytype= p[1])
+            
 
 def p_arrt_data(p):
     '''arrt : var 
@@ -320,6 +356,7 @@ def p_factarr_vals(p):
 def p_error(p):
     print("Syntax error in input!")
     print(p)
+    exit()
 
 # Build the parser
 parser = yacc.yacc()
@@ -359,3 +396,6 @@ char ch = '5';
 #string res;
 
 '''
+
+
+"TODO: correct assign"

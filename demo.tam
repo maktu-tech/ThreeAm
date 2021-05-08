@@ -1,8 +1,9 @@
 int a = 45;
 int b = 50;
 int c;
-string s1="123";
-for(s1="234"; a<12; s1="2"){
+string[] s1={"123","5","6"};
+#int a1[23];
+for(s1[0]="234"; a<12; s1[0]="2"){
     while(a < 95){
         int f = 0;
         if(f > b){
@@ -24,8 +25,14 @@ for(s1="234"; a<12; s1="2"){
     }
     }
 c = a+b;
-string s2 = s1;
+string[] s2=s1;
 print("1243");
 int[] var = {12,15,15};
+int[] var2 = {10};
 var[2] = 45;
+var[2] = 56;
+var[1] = var[0] + var[1];
+#var = s1;
 c = 45 + var[3];
+#int ayush[23];
+a=12;
